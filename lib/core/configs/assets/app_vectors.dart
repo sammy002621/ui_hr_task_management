@@ -18,4 +18,6 @@ class AppVectors {
        static final work_profile_arrow =
       "${basePath}work_profile_arrow$ext";
   
+  static final work_profile_logo =
+      "${basePath}work_profile_logo$ext";
 }

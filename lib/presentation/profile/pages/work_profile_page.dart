@@ -2,7 +2,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
-import 'package:workmate/core/configs/assets/app_images.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
@@ -83,8 +82,9 @@ class WorkProfilePage extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         DottedBorder(
+          color: const Color(0xffBDB4FE),
           strokeWidth: 2.0,
-          dashPattern: [10, 3],
+          dashPattern: [10, 7],
           borderType: BorderType.RRect,
           radius: Radius.circular(12),
           child: CenteredContainer(
@@ -93,11 +93,10 @@ class WorkProfilePage extends StatelessWidget {
             bgColor: const Color(0xffFAFAFF),
             borderRadius: 0,
             padding: 0,
-            child: Image.asset(
-              AppImages.work_profile_logo,
-              width: 55,
-              height: 55,
-              fit: BoxFit.cover,
+            child: SvgPicture.asset(
+              AppVectors.work_profile_logo,
+              width: 50,
+              height: 50,
               ),
           ),
         ),
@@ -196,15 +195,15 @@ const SizedBox(height: 25,),
     ),
     Positioned(
       top: 60,
-      left: 210,// Using FractionalOffset instead
+      left: 215,// Using FractionalOffset instead
       child: CenteredContainer(
-        width: 55,
-        height: 55,
+        width: 45,
+        height: 45,
         bgColor: AppColors.primaryColor,
         child: SvgPicture.asset(
           AppVectors.work_profile_arrow,
-          width: 30,
-          height: 30,
+          width: 25,
+          height: 25,
         ),
       ),
     ),
