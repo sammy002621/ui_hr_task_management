@@ -20,4 +20,7 @@ class AppVectors {
   
   static final work_profile_logo =
       "${basePath}work_profile_logo$ext";
+
+  static final clock_in_out_logo =
+      "${basePath}clock_in_logo$ext";
 }
