@@ -18,12 +18,15 @@ class ClockInOutCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // date
-            Text(
+           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+               Text(
               date,
               style: TextStyle(
                 color: const Color(0xff101828),
@@ -31,19 +34,28 @@ class ClockInOutCard extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+            ],
+           ),
 
             const SizedBox(
               height: 20,
             ),
 
             // total hours and clock in and out details
-
+// 
             Container(
               decoration: BoxDecoration(
-                  color: const Color(0xffEAECF0),
-                  borderRadius: BorderRadius.circular(20)),
+                  color: const Color(0xffF9FAFB),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: const Color(0xffEAECF0),
+                    width: 2,
+                  )
+                  
+                  ),
+                  
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -51,10 +63,14 @@ class ClockInOutCard extends StatelessWidget {
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // total hours
 
-                            Text(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
                               "Total Hours",
                               style: TextStyle(
                                 color: AppColors.primaryColor,
@@ -62,8 +78,13 @@ class ClockInOutCard extends StatelessWidget {
                                 fontSize: 17,
                               ),
                             ),
+                              ],
+                            ),
 
-                            Text(
+                            Row(
+                              
+                              children: [
+                                Text(
                               totalHours,
                               style: TextStyle(
                                 color: const Color(0xff344054),
@@ -71,6 +92,8 @@ class ClockInOutCard extends StatelessWidget {
                                 fontSize: 17,
                               ),
                             ),
+                              ],
+                            )
                           ],
                         )
                       ],
@@ -80,6 +103,7 @@ class ClockInOutCard extends StatelessWidget {
 //clock in & out
 
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             // total hours
