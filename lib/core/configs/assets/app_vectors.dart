@@ -23,4 +23,7 @@ class AppVectors {
 
   static final clock_in_out_logo =
       "${basePath}clock_in_logo$ext";
+
+      static final clock_logo =
+      "${basePath}clock$ext";
 }
