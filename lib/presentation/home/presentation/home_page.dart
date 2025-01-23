@@ -92,18 +92,19 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       CenteredContainer(
-                        width: 50,
-                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        height: 40,
                         bgColor: const Color(0xffF4F5FF),
                         child: Icon(
                           Icons.message,
                           color: AppColors.iconColor,
+                          size: 22,
                         ),
                       ),
                       const SizedBox(width: 5),
                       CenteredContainer(
-                        width: 50,
-                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.1,
+                        height: 40,
                         bgColor: const Color(0xffF4F5FF),
                         child: Icon(
                           Icons.notifications,

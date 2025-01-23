@@ -54,9 +54,6 @@ Widget build(BuildContext context) {
     children: [
       Container(
         width: double.infinity,
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.8, // Adjust as needed
-        ),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

@@ -21,7 +21,7 @@ class SkipButton extends StatelessWidget {
               ? onIndexChange
               : onTap,
           child: Container(
-            width: 360,
+            width: MediaQuery.of(context).size.width * 0.9,
             height: 60,
             decoration: BoxDecoration(
                 border: Border.all(color: Color(0xff7A5AF8)),

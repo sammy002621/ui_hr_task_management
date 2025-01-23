@@ -48,8 +48,8 @@ class CustomCard extends StatelessWidget {
                   description,
                   style: TextStyle(
                     color: const Color(0xff161B23),
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 19,
                   ),
                 ),
 

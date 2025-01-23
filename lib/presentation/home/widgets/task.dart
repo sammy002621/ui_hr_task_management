@@ -14,7 +14,6 @@ class Task extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Container(
-        width: 357,
         height: 220,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xffEAECF0), width: 2.0),
@@ -102,7 +101,7 @@ Row(
                   children: [
 
                  SizedBox(
-                      width: 100,
+                      width: 90,
                       height: 45,
                       child: profiles,
                     )
@@ -118,9 +117,9 @@ Row(
                 Row(
                   children: [
                     // date
-Flag(iconColor: const Color(0xffD0D5DD), icon: Icons.date_range_rounded, iconTitle: "27 April", textColor: const Color(0xff101828), color: Colors.white,paddingHor: 18,paddingVert: 10,),
+Flag(iconColor: const Color(0xffD0D5DD), icon: Icons.date_range_rounded, iconTitle: "27 April", textColor: const Color(0xff101828), color: Colors.white,paddingHor: 10,paddingVert: 10,),
 const SizedBox(width: 10,),
-Flag(iconColor: const Color(0xffD0D5DD), icon: Icons.message, iconTitle: "2", textColor: const Color(0xff101828), color: Colors.white,paddingHor: 18,paddingVert: 10,),
+Flag(iconColor: const Color(0xffD0D5DD), icon: Icons.message, iconTitle: "2", textColor: const Color(0xff101828), color: Colors.white,paddingHor: 16,paddingVert: 10,),
 
 
                     // messages 

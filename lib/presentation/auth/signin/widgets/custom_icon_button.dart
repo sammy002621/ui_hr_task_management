@@ -18,7 +18,7 @@ class CustomIconButton extends StatelessWidget {
             color: const Color(0xff6938EF),
           ),
           borderRadius: BorderRadius.circular(40)),
-      width: 360,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Center(
         child: Padding(padding: const EdgeInsets.only(left: 50,top: 15,bottom: 15),
         child: Row(

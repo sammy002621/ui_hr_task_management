@@ -14,7 +14,6 @@ class Meeting extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Container(
-        width: 357,
         decoration: BoxDecoration(
             border: Border.all(color: const Color(0xffEAECF0), width: 2.0),
             borderRadius: BorderRadius.circular(10),
@@ -56,14 +55,17 @@ class Meeting extends StatelessWidget {
                   Row(
                     children: [
                       // time
+ Text(
+    time,
+    style: TextStyle(
+      color: AppColors.descriptionColor,
+      fontWeight: FontWeight.w600,
+      fontSize: 14,
+    ),
+    overflow: TextOverflow.ellipsis,
+    maxLines: 1,
+  ),
 
-                      Text(
-                        time,
-                        style: TextStyle(
-                            color: AppColors.descriptionColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14),
-                      )
                     ],
                   )
                 ],

@@ -348,7 +348,7 @@ class _SignInPageState extends State<SignInPage> {
           CustomButton(
             title: "Sign In",
             onTap: _navigateHome,
-            width: 355,
+            width: MediaQuery.of(context).size.width * 0.9,
             height: 60,
           ),
 
@@ -445,6 +445,8 @@ class _SignInPageState extends State<SignInPage> {
                   ]))
             ],
           ),
+
+          const SizedBox(height: 30,)
         ],
       ),
     )

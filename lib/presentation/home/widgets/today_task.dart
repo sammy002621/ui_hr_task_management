@@ -21,7 +21,6 @@ class TodayTask extends StatelessWidget {
     return Padding(padding:const EdgeInsets.only(bottom: 40),
     child: Container(
       height: height,
-      width: 370,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,

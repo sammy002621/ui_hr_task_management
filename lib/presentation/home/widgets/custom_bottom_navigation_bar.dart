@@ -27,7 +27,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.home_filled),
+              const Icon(
+                Icons.home_filled,
+                color: Colors.white,
+                ),
               const SizedBox(height: 8),
               if (selectedIndex == 0)
                 Container(

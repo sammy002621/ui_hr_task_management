@@ -20,7 +20,7 @@ class NextButton extends StatelessWidget {
         onTap:
             index == 3 ? onIndexChange : onTap,
         child: Container(
-          width: 360,
+          width: MediaQuery.of(context).size.width * 0.9,
           height: 60,
           decoration: BoxDecoration(
               color: Color.fromARGB(255, 60, 21, 218),

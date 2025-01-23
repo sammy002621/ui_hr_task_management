@@ -14,10 +14,29 @@ import 'package:workmate/presentation/home/widgets/total_working_hour.dart';
 class ClockInPage extends StatelessWidget {
   ClockInPage({super.key});
 
-  final cards = [
+
+  
+ 
+
+ 
+
+  @override
+  Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+      final cards = [
     TotalWorkingHour(
         title: 'Total Working Hour',
-        subtitle: 'Paid Period 1 Sept 2024 - 30 Sept 2024',
+        subtitle: RichText(
+          text: TextSpan(
+            text: 'Paid Period 1 Sept 2024 - 30 Sept 2024',
+            style: TextStyle(
+             color: AppColors.descriptionColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500
+            )
+          ) 
+        ),
         widget: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -53,7 +72,7 @@ class ClockInPage extends StatelessWidget {
         button: CustomButton(
             title: 'Clock In',
             onTap: () {},
-            width: 300,
+            width: MediaQuery.of(context).size.width * 0.9,
             height: 60)),
     ClockInOutCard(
       date: "27 September 2024",
@@ -71,15 +90,6 @@ class ClockInPage extends StatelessWidget {
       duration: "09:00 — 05:00 PM",
     ),
   ];
-
-  double _returnParentWidth(BuildContext context) {
-    return MediaQuery.of(context).size.width;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: const Color(0xffEAECF0),
         body: Stack(

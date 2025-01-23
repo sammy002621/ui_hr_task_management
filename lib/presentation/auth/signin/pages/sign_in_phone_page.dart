@@ -77,7 +77,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                 ),
                 borderRadius: BorderRadius.circular(15),
                 fieldWidth: 53,
-                numberOfFields: 6,
+                numberOfFields: 4,
                 borderColor: Color(0xFFFEFEFE),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true,
@@ -91,7 +91,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
               button1: CustomButton(
                 title: "Submit",
                 onTap: _navigateHome,
-                width: 355,
+               width: MediaQuery.of(context).size.width * 0.9,
                 height: 60,),
               belowTextField: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -266,7 +266,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           CustomButton(
             title: "Sign In",
             onTap: _navigatePhoneSignin,
-            width: 355,
+            width:MediaQuery.of(context).size.width * 0.9,
             height: 60,
           ),
 
@@ -363,6 +363,8 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                   ]))
             ],
           ),
+
+          const SizedBox(height: 30,)
         ],
       ),
     ));

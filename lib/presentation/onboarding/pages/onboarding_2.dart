@@ -21,7 +21,7 @@ class Onboarding2 extends StatelessWidget {
             child: SvgPicture.asset(
               
               AppVectors.working_period_onboarding,
-              width: 400,
+              width: MediaQuery.of(context).size.width * 0.9,
               
             )),
 
@@ -30,7 +30,7 @@ class Onboarding2 extends StatelessWidget {
             alignment: const Alignment(0, 0.1),
             child: SvgPicture.asset(
               AppVectors.working_period_onboarding,
-              width: 400,
+              width: MediaQuery.of(context).size.width * 0.9,
             ),
           ),
 

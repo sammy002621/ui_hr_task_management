@@ -19,16 +19,16 @@ class Onboarding1 extends StatelessWidget {
             alignment: const Alignment(0, -0.85),
             child: SvgPicture.asset(
               AppVectors.today_task_onboarding,
-              width: 350,
+              width: MediaQuery.of(context).size.width * 0.9,
             ),
           ),
 
 // image 2
           Align(
-            alignment: const Alignment(0.6, -0.5),
+            alignment: const Alignment(0.6, -0.6),
             child: SvgPicture.asset(
               AppVectors.today_task_onboarding,
-              width: 350,
+              width: MediaQuery.of(context).size.width * 0.9,
             ),
           ),
 
@@ -63,7 +63,9 @@ class Onboarding1 extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                     ),
-                )
+                ),
+
+                SizedBox(height: 10,)
               ],
             ),
           )

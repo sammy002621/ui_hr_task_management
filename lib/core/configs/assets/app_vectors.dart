@@ -26,4 +26,16 @@ class AppVectors {
 
       static final clock_logo =
       "${basePath}clock$ext";
+
+      static final task_progress_code =
+      "${basePath}task_progress_code$ext";
+
+      static final task_progress_time =
+      "${basePath}task_progress_time_yellow$ext";
+
+      static final task_progress_done =
+      "${basePath}task_progress_done$ext";
+
+      static final task_progress_yellow_face =
+      "${basePath}yellow_face$ext";
 }

@@ -59,13 +59,13 @@ showModalBottomSheet(
               button1: CustomButton(
                 title: "Set Up My Profile",
                 onTap: _navigateProfile,
-                width: 355,
+                width: MediaQuery.of(context).size.width * 0.9, 
                 height: 60,),
               
               button2: CustomButton(
                 title: "Explore The App First",
                 onTap: _navigateHome, 
-                width: 355, 
+                width: MediaQuery.of(context).size.width * 0.9, 
                 height:60,
                 color:Colors.white,
                 textColor: AppColors.primaryColor,
@@ -120,7 +120,7 @@ showModalBottomSheet(
                 ),
                 borderRadius: BorderRadius.circular(15),
                 fieldWidth: 53,
-                numberOfFields: 6,
+                numberOfFields: 4,
                 borderColor: Color(0xFFFEFEFE),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true,
@@ -161,7 +161,7 @@ showModalBottomSheet(
               button1: CustomButton(
                 title: "Submit",
                 onTap: navigateWelcome,
-                width: 355,
+                width:MediaQuery.of(context).size.width * 0.9, 
                 height: 60,),
               isTextorButton: true,
               );
