@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _navigateHome(){
      Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+        context, MaterialPageRoute(builder: (context) => const MainHomeScreen()));
   }
 
    void _navigateProfile(){

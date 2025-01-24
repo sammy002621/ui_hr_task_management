@@ -63,7 +63,7 @@ class Meeting extends StatelessWidget {
       fontSize: 14,
     ),
     overflow: TextOverflow.ellipsis,
-    maxLines: 1,
+    maxLines: 2,
   ),
 
                     ],
@@ -83,7 +83,7 @@ class Meeting extends StatelessWidget {
                     children: [
                       // image 
                      SizedBox(
-                      width: 100,
+                      width: 80,
                       height: 45,
                       child: profiles,
                     )

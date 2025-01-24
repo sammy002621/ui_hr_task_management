@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                           height: 70,
                         ),
                       ),
-                      const SizedBox(width: 15),
+                      const SizedBox(width: 12),
                       // profile description
                       Column(
                         mainAxisSize: MainAxisSize.min,
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 16,
                                 ),
                               ),
-                              const SizedBox(width: 10),
+                              const SizedBox(width: 8),
                               Icon(
                                 Icons.verified,
                                 color: const Color(0xff675AFF),
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(
-                    width: 2,
+                    width: 5,
                   ),
                   Row(
                     children: [
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                           size: 22,
                         ),
                       ),
-                      const SizedBox(width: 5),
+                      
                       CenteredContainer(
                         width: MediaQuery.of(context).size.width * 0.1,
                         height: 40,
@@ -183,12 +183,12 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Meeting(
                             title: "Townhall Meeting",
-                            time: "01:30-02:00 AM",
+                            time: "01:30-02:00",
                             profiles: CustomAvatarStack(),
                           ),
                           Meeting(
                             title: "Dashboard Report",
-                            time: "01:30-02:00 AM",
+                            time: "01:30-02:00",
                             profiles: CustomAvatarStack(),
                           ),
                         ],

@@ -18,20 +18,24 @@ class Onboarding3 extends StatelessWidget {
           Align(
             alignment: const Alignment(0, -0.85),
             child: SvgPicture.asset(
-              AppVectors.achievement_onboarding,
-             width: MediaQuery.of(context).size.width * 0.9,
-              
+              AppVectors.today_task_onboarding,
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
 
 // image 2
           Align(
-            alignment: const Alignment(0.6, -0.55),
+            alignment: const Alignment(0.6, -0.6),
             child: SvgPicture.asset(
-              AppVectors.today_task_1_onboarding,
+              AppVectors.today_task_onboarding,
               width: MediaQuery.of(context).size.width * 0.9,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
+  
 
           
 // header

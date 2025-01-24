@@ -20,6 +20,8 @@ class Onboarding1 extends StatelessWidget {
             child: SvgPicture.asset(
               AppVectors.today_task_onboarding,
               width: MediaQuery.of(context).size.width * 0.9,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
 
@@ -29,6 +31,8 @@ class Onboarding1 extends StatelessWidget {
             child: SvgPicture.asset(
               AppVectors.today_task_onboarding,
               width: MediaQuery.of(context).size.width * 0.9,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
 

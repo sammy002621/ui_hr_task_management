@@ -68,7 +68,7 @@ class _SplashPageState extends State<SplashPage> {
               ],
             ),
             Align(
-              alignment: const Alignment(0, 0.9),
+              alignment: const Alignment(0, 1),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -103,6 +103,8 @@ class _SplashPageState extends State<SplashPage> {
                     onTap: _onSkip,
                     onIndexChange: _navigateSignup,
                   ),
+
+                  const SizedBox(height: 10),
                 ],
               ),
             ),

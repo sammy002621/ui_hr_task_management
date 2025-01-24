@@ -98,8 +98,8 @@ class ClockInOutCard extends StatelessWidget {
 //clock in & out
 
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // total hours
 

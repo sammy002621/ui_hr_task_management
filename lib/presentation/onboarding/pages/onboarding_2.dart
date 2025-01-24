@@ -15,29 +15,31 @@ class Onboarding2 extends StatelessWidget {
         children: [
 // image1
 
-          Positioned(
-            top:35,
-            right: 13,
+          Align(
+            alignment: const Alignment(0, -0.85),
             child: SvgPicture.asset(
-              
-              AppVectors.working_period_onboarding,
+              AppVectors.today_task_onboarding,
               width: MediaQuery.of(context).size.width * 0.9,
-              
-            )),
+              height: 250,
+              fit: BoxFit.cover,
+            ),
+          ),
 
 // image 2
           Align(
-            alignment: const Alignment(0, 0.1),
+            alignment: const Alignment(0.6, -0.6),
             child: SvgPicture.asset(
-              AppVectors.working_period_onboarding,
+              AppVectors.today_task_onboarding,
               width: MediaQuery.of(context).size.width * 0.9,
+              height: 250,
+              fit: BoxFit.cover,
             ),
           ),
 
           
 // header
           Align(
-            alignment: const Alignment(-0.6, 0.4),
+            alignment: const Alignment(-0.6, 0.3),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

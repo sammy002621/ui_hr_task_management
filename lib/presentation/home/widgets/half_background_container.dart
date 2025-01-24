@@ -61,6 +61,7 @@ class HalfBackgroundContainer extends StatelessWidget {
                   )
                 ],
               ),
+
               Row(
                 children: [
                   // clock in image

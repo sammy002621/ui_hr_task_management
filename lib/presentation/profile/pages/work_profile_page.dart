@@ -195,7 +195,7 @@ const SizedBox(height: 25,),
     ),
     Positioned(
       top: 60,
-      left: 215,// Using FractionalOffset instead
+      left: MediaQuery.of(context).size.width * 0.55,// Using FractionalOffset instead
       child: CenteredContainer(
         width: 45,
         height: 45,
