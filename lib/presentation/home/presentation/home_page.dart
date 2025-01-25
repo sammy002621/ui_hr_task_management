@@ -127,7 +127,6 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       // summary
                       Container(
-                        width: 370,
                         height: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),

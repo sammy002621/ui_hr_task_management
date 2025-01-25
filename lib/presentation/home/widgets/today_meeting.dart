@@ -17,8 +17,8 @@ class TodayMeeting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+     width: MediaQuery.of(context).size.width ,
       height: 370,
-      width: 370,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Colors.white,

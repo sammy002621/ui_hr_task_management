@@ -23,6 +23,7 @@ class FittedTotalWorkingHour extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     return FittedBox(
       child: Container(
+        width: screenWidth,
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(15)),
         child: Padding(

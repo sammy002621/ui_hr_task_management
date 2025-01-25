@@ -6,6 +6,7 @@ import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 import 'package:workmate/presentation/home/widgets/custom_card.dart';
 import 'package:workmate/presentation/home/widgets/custom_list_view.dart';
+import 'package:workmate/presentation/home/widgets/custom_tab_bar.dart';
 import 'package:workmate/presentation/home/widgets/fitted_total_working_hour.dart';
 import 'package:workmate/presentation/home/widgets/flag.dart';
 import 'package:workmate/presentation/home/widgets/half_background_container.dart';
@@ -37,7 +38,9 @@ class TaskProgressPage extends StatelessWidget {
       widget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           CustomCard(
+           SizedBox(
+            width: screenWidth * 0.3,
+            child: CustomCard(
               title: 'To Do',
               description: "5", 
               widget: SvgPicture.asset(
@@ -46,8 +49,9 @@ class TaskProgressPage extends StatelessWidget {
                 height: 18,
                 ),
             ),
+           ),
           
-const SizedBox(width: 5,),
+
            CustomCard(
               title: 'Progress',
               description: "2",
@@ -57,20 +61,22 @@ const SizedBox(width: 5,),
                 height: 18,
                 ),
             ),
-          
-const SizedBox(width: 5,),
+        
 
 
 
-          CustomCard(
-              title: 'Done',
-              description: "1",
-              widget: SvgPicture.asset(
-                AppVectors.task_progress_done,
-                 width: 18,
-                height: 18,
-                ),
-            ),
+          SizedBox(
+            width: screenWidth * 0.3,
+            child: CustomCard(
+                title: 'Done',
+                description: "1",
+                widget: SvgPicture.asset(
+                  AppVectors.task_progress_done,
+                   width: 18,
+                  height: 18,
+                  ),
+              ),
+          ),
           
         ],
       ),
@@ -171,6 +177,13 @@ belowWidgetSpace: 10,
 ),
 
 
+
+
+
+ SizedBox(
+  height: screenHeight * 0.5,
+  child: CustomTabBar(),
+  )
 
      
 
