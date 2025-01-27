@@ -10,9 +10,9 @@ class CustomListView extends StatelessWidget {
     return Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
-                height: screenHeight * 0.62,
+                height: screenHeight * 0.64,
                 child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   itemCount:
                       cards.length, // Replace with the actual number of cards
                   itemBuilder: (context, index) {

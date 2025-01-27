@@ -42,7 +42,7 @@ class HalfBackgroundContainer extends StatelessWidget {
                             title,
                             style: GoogleFonts.roboto(
                                 color: Colors.white,
-                                fontSize: 30,
+                                fontSize: 25,
                                 fontWeight: FontWeight.bold),
                           ),
                         ],

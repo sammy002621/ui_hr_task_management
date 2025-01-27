@@ -1,21 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
 import 'package:workmate/presentation/home/widgets/custom_avatar_stack.dart';
 import 'package:workmate/presentation/home/widgets/tab_item.dart';
 import 'package:workmate/presentation/home/widgets/task.dart';
 import 'package:workmate/presentation/home/widgets/today_meeting.dart';
 import 'package:workmate/presentation/home/widgets/today_task.dart';
 
-class CustomTabBar extends StatelessWidget {
-  const CustomTabBar({super.key});
+class CustomTabBar extends StatefulWidget {
+  final String title1;
+  final String title2;
+  final String title3;
+  final List<Widget> children1;
+  final List<Widget> children2;
+  final List<Widget> children3;
+  const CustomTabBar(
+      {super.key,
+      required this.title1,
+      required this.title2,
+      required this.title3,
+      required this.children1,
+      required this.children2,
+      required this.children3,
+      });
+
+  @override
+  State<CustomTabBar> createState() => _CustomTabBarState();
+}
+
+class _CustomTabBarState extends State<CustomTabBar>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(() {
+      setState(() {
+        _selectedIndex = _tabController.index;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Column(
-      children: [
-      
+        children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(60)),
             child: Container(
@@ -26,6 +68,7 @@ class CustomTabBar extends StatelessWidget {
                 color: Colors.white,
               ),
               child: TabBar(
+                controller: _tabController,
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
                 indicator: BoxDecoration(
@@ -35,54 +78,37 @@ class CustomTabBar extends StatelessWidget {
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black54,
                 tabs: [
-                  TabItem(title: "All", count: '2'),
-                  TabItem(title: "Progress", count: '0'),
-                  TabItem(title: "Finish", count: '2'),
+                  TabItem(title: widget.title1, count: '3'),
+                  TabItem(title: widget.title2, count: '2'),
+                  TabItem(title: widget.title3, count: '2'),
                 ],
               ),
             ),
           ),
-        
-        Expanded(
-          child: TabBarView(
-            children: [
-              Flexible(
-                child: ListView(
-                  children: [
-                    Task(
-                      title: "Wiring Dashboard Analytics",
-                      profiles: CustomAvatarStack(),
-                    ),
-                    const SizedBox(height: 20),
-                    Task(
-                      title: "Wiring Dashboard Analytics",
-                      profiles: CustomAvatarStack(),
-                    ),
-                  ],
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Flexible(
+                  child: ListView(
+                    children: widget.children1
+                  ),
                 ),
-              ),
-              Center(child: Text("No Progress Tasks")),
-              Flexible(
-                child: ListView(
-                  children: [
-                    
-                    Task(
-                      title: "Wiring Dashboard Analytics",
-                      profiles: CustomAvatarStack(),
-                    ),
-                    
-                    Task(
-                      title: "Wiring Dashboard Analytics",
-                      profiles: CustomAvatarStack(),
-                    ),
-                  ],
+                Flexible(
+                  child: ListView(
+                    children:widget.children2
+                  ),
                 ),
-              ),
-            ],
+                Flexible(
+                  child: ListView(
+                    children:widget.children3
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
     );
   }
 }

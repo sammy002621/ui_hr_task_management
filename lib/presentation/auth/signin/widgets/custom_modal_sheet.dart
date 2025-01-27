@@ -4,8 +4,8 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/presentation/home_page.dart';
-import 'package:workmate/presentation/home/presentation/main_home_screen.dart';
+import 'package:workmate/presentation/home/pages/home_page.dart';
+import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 
 // description height
 // otp height

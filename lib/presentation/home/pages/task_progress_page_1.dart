@@ -4,12 +4,15 @@ import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
+import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
+import 'package:workmate/presentation/home/widgets/custom_avatar_stack.dart';
 import 'package:workmate/presentation/home/widgets/custom_card.dart';
 import 'package:workmate/presentation/home/widgets/custom_list_view.dart';
 import 'package:workmate/presentation/home/widgets/custom_tab_bar.dart';
 import 'package:workmate/presentation/home/widgets/fitted_total_working_hour.dart';
 import 'package:workmate/presentation/home/widgets/flag.dart';
 import 'package:workmate/presentation/home/widgets/half_background_container.dart';
+import 'package:workmate/presentation/home/widgets/task.dart';
 import 'package:workmate/presentation/home/widgets/total_working_hour.dart';
 
 class TaskProgressPage extends StatelessWidget {
@@ -38,21 +41,23 @@ class TaskProgressPage extends StatelessWidget {
       widget: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-           SizedBox(
-            width: screenWidth * 0.3,
-            child: CustomCard(
+            CustomCard(
+              width: screenWidth * 0.3,
               title: 'To Do',
               description: "5", 
               widget: SvgPicture.asset(
                 AppVectors.task_progress_code,
                 width: 18,
                 height: 18,
+
+    
                 ),
             ),
-           ),
+           
           
 
            CustomCard(
+              width: screenWidth * 0.33,
               title: 'Progress',
               description: "2",
               widget: SvgPicture.asset(
@@ -65,9 +70,8 @@ class TaskProgressPage extends StatelessWidget {
 
 
 
-          SizedBox(
-            width: screenWidth * 0.3,
-            child: CustomCard(
+          CustomCard(
+                width: screenWidth * 0.27,
                 title: 'Done',
                 description: "1",
                 widget: SvgPicture.asset(
@@ -76,7 +80,7 @@ class TaskProgressPage extends StatelessWidget {
                   height: 18,
                   ),
               ),
-          ),
+          
           
         ],
       ),
@@ -182,7 +186,50 @@ belowWidgetSpace: 10,
 
  SizedBox(
   height: screenHeight * 0.5,
-  child: CustomTabBar(),
+  child: CustomTabBar(
+    title1: 'All',
+    title2: 'Doing',
+    title3: 'Finish',
+
+    children1: [
+      Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+                      const SizedBox(height: 8),
+                      Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+                      
+    ],
+
+
+
+    children2: [
+      Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+                      const SizedBox(height: 8),
+                      Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+    ],
+
+
+    children3: [
+       Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+                      Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
+    ],
+  ),
   )
 
      
@@ -202,7 +249,10 @@ belowWidgetSpace: 10,
                   AppVectors.clock_in_out_logo,
                 )),
 
-            CustomListView(cards: cards)
+            CustomListView(cards: cards),
+
+
+            
           ],
         ));
   }

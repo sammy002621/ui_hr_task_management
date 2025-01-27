@@ -10,8 +10,8 @@ import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dar
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/presentation/home_page.dart';
-import 'package:workmate/presentation/home/presentation/main_home_screen.dart';
+import 'package:workmate/presentation/home/pages/home_page.dart';
+import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 
 class SignInPhonePage extends StatefulWidget {
   const SignInPhonePage({super.key});

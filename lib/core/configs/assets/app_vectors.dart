@@ -38,4 +38,13 @@ class AppVectors {
 
       static final task_progress_yellow_face =
       "${basePath}yellow_face$ext";
+
+      static final expense_summary_logo =
+      "${basePath}expense_summary_logo$ext";
+
+      static final expense_summary_total =
+      "${basePath}expense_summary_total$ext";
+
+      static final expense_status_date =
+      "${basePath}expense_status_date_logo$ext";
 }

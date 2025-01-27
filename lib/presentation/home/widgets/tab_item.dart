@@ -16,7 +16,7 @@ class TabItem extends StatelessWidget {
             title,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 16,
+              fontSize: 15,
               color: AppColors.descriptionColor
             ),
             overflow: TextOverflow.ellipsis,

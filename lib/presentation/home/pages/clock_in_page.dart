@@ -40,9 +40,8 @@ class ClockInPage extends StatelessWidget {
         widget: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Flexible(
-              flex: 1,
-              child: CustomCard(
+             CustomCard(
+                width: screenWidth * 0.42,
                 title: 'Today',
                 description: "00:00 Hrs",
                 widget: SvgPicture.asset(
@@ -51,13 +50,10 @@ class ClockInPage extends StatelessWidget {
                   height: 22,
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Flexible(
-              flex: 1,
-              child: CustomCard(
+            
+            
+             CustomCard(
+                width: screenWidth * 0.42,
                 title: 'Pay Period',
                 description: "32:00 Hrs",
                 widget: SvgPicture.asset(
@@ -66,7 +62,7 @@ class ClockInPage extends StatelessWidget {
                   height: 22,
                 ),
               ),
-            )
+          
           ],
         ),
         button: CustomButton(
@@ -74,20 +70,27 @@ class ClockInPage extends StatelessWidget {
             onTap: () {},
             width: MediaQuery.of(context).size.width * 0.9,
             height: 60)),
+
     ClockInOutCard(
       date: "27 September 2024",
-      totalHours: "08:00 hrs",
-      duration: "09:00 — 05:00 PM",
+      title1: 'Total Hours',
+      subtitle1: '08:00:00 hrs',
+      title2: 'Duration',
+      subtitle2: '09:00 — 05:00 PM',
     ),
     ClockInOutCard(
       date: "26 September 2024",
-      totalHours: "08:00 hrs",
-      duration: "09:00 — 05:00 PM",
+      title1: 'Total Hours',
+      subtitle1: '08:00:00 hrs',
+      title2: 'Duration',
+      subtitle2: '09:00 — 05:00 PM',
     ),
     ClockInOutCard(
       date: "25 September 2024",
-      totalHours: "08:10 hrs",
-      duration: "09:00 — 05:00 PM",
+      title1: 'Total Hours',
+      subtitle1: '08:00:00 hrs',
+      title2: 'Duration',
+      subtitle2: '09:00 — 05:00 PM',
     ),
   ];
     return Scaffold(

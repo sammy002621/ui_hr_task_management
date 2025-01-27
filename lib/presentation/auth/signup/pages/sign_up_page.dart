@@ -8,8 +8,8 @@ import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
-import 'package:workmate/presentation/home/presentation/home_page.dart';
-import 'package:workmate/presentation/home/presentation/main_home_screen.dart';
+import 'package:workmate/presentation/home/pages/home_page.dart';
+import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 import 'package:workmate/presentation/onboarding/widgets/next_button.dart';
 import 'package:workmate/presentation/profile/pages/profile_page.dart';
 

@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 
 class ClockInOutCard extends StatelessWidget {
   final String date;
-  final String totalHours;
-  final String duration;
+  final Widget? image;
+  final String title1;
+  final String title2;
+  final String subtitle1;
+  final String subtitle2;
   const ClockInOutCard(
       {super.key,
       required this.date,
-      required this.totalHours,
-      required this.duration});
+      this.image,
+      required this.title1,
+      required this.title2,
+      required this.subtitle1,
+      required this.subtitle2,
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +25,7 @@ class ClockInOutCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(15)),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -25,6 +33,11 @@ class ClockInOutCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                // icon
+                image ?? SizedBox.shrink(),
+                const SizedBox(
+                  width: 10,
+                ),
                 Text(
                   date,
                   style: TextStyle(
@@ -37,7 +50,7 @@ class ClockInOutCard extends StatelessWidget {
             ),
 
             const SizedBox(
-              height: 20,
+              height: 15,
             ),
 
             // total hours and clock in and out details
@@ -67,7 +80,7 @@ class ClockInOutCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Total Hours",
+                                  title1,
                                   style: TextStyle(
                                     color: AppColors.primaryColor,
                                     fontWeight: FontWeight.w600,
@@ -80,7 +93,7 @@ class ClockInOutCard extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  totalHours,
+                                  subtitle1,
                                   style: TextStyle(
                                     color: const Color(0xff344054),
                                     fontWeight: FontWeight.w600,
@@ -104,7 +117,7 @@ class ClockInOutCard extends StatelessWidget {
                             // total hours
 
                             Text(
-                              "Clock in & Out",
+                              title2,
                               style: TextStyle(
                                 color: AppColors.primaryColor,
                                 fontWeight: FontWeight.w600,
@@ -113,7 +126,7 @@ class ClockInOutCard extends StatelessWidget {
                             ),
 
                             Text(
-                              duration,
+                              subtitle2,
                               style: TextStyle(
                                 color: const Color(0xff344054),
                                 fontWeight: FontWeight.w600,

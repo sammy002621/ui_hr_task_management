@@ -4,11 +4,11 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:workmate/core/configs/assets/app_images.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/bloc/cubit/navigation_cubit.dart';
-import 'package:workmate/presentation/home/presentation/clock_in_page.dart';
-import 'package:workmate/presentation/home/presentation/expense_status_page.dart';
-import 'package:workmate/presentation/home/presentation/home_page.dart';
-import 'package:workmate/presentation/home/presentation/leave_page.dart';
-import 'package:workmate/presentation/home/presentation/task_progress_page.dart';
+import 'package:workmate/presentation/home/pages/clock_in_page.dart';
+import 'package:workmate/presentation/home/pages/task_progress_page_1.dart';
+import 'package:workmate/presentation/home/pages/home_page.dart';
+import 'package:workmate/presentation/home/pages/leave_page.dart';
+import 'package:workmate/presentation/home/pages/expense_status_page.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 import 'package:workmate/presentation/home/widgets/custom_avatar_stack.dart';
 import 'package:workmate/presentation/home/widgets/custom_bottom_navigation_bar.dart';
@@ -30,8 +30,8 @@ class _MainHomeScreenState extends State<MainHomeScreen> {
     final List<Widget> widgetOptions = [
       HomePage(),
       ClockInPage(),
-      ExpenseStatusPage(),
       TaskProgressPage(),
+      ExpenseStatusPage(),
       LeavePage()
     ];
     return BlocBuilder<NavigationCubit,int>(

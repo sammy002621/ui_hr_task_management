@@ -68,7 +68,7 @@ class _SplashPageState extends State<SplashPage> {
               ],
             ),
             Align(
-              alignment: Alignment(0,0.9),
+              alignment: Alignment(0,1),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
