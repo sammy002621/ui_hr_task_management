@@ -27,10 +27,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           icon: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
-                Icons.home_filled,
-                color: Colors.white,
-                ),
+              HugeIcon(
+                icon: HugeIcons.strokeRoundedHome02, 
+                color: Colors.white),
               const SizedBox(height: 8),
               if (selectedIndex == 0)
                 Container(
@@ -119,7 +118,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               HugeIcon(
-                icon: HugeIcons.strokeRoundedAbacus,
+                icon: HugeIcons.strokeRoundedLayers01,
                 color: Colors.white,
               ),
               const SizedBox(height: 8),

@@ -84,9 +84,9 @@ class _CustomTabBarState extends State<CustomTabBar>
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black54,
                 tabs: [
-                  TabItem(title: widget.title1, count: widget.count1),
-                  TabItem(title: widget.title2, count: widget.count2),
-                  TabItem(title: widget.title3, count: widget.count3),
+                  TabItem(title: widget.title1, count: widget.count1, isSelected: _selectedIndex == 0,),
+                  TabItem(title: widget.title2, count: widget.count2, isSelected: _selectedIndex == 1,),
+                  TabItem(title: widget.title3, count: widget.count3, isSelected: _selectedIndex == 2,),
                 ],
               ),
             ),
