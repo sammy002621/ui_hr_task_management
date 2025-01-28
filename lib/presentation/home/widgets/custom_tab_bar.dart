@@ -13,18 +13,24 @@ class CustomTabBar extends StatefulWidget {
   final String title1;
   final String title2;
   final String title3;
+  final String count1;
+  final String count2;
+  final String count3;
   final List<Widget> children1;
   final List<Widget> children2;
   final List<Widget> children3;
-  const CustomTabBar(
-      {super.key,
-      required this.title1,
-      required this.title2,
-      required this.title3,
-      required this.children1,
-      required this.children2,
-      required this.children3,
-      });
+  const CustomTabBar({
+    super.key,
+    required this.title1,
+    required this.title2,
+    required this.title3,
+    required this.children1,
+    required this.children2,
+    required this.children3,
+    required this.count1,
+    required this.count2,
+    required this.count3,
+  });
 
   @override
   State<CustomTabBar> createState() => _CustomTabBarState();
@@ -78,9 +84,9 @@ class _CustomTabBarState extends State<CustomTabBar>
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black54,
                 tabs: [
-                  TabItem(title: widget.title1, count: '3'),
-                  TabItem(title: widget.title2, count: '2'),
-                  TabItem(title: widget.title3, count: '2'),
+                  TabItem(title: widget.title1, count: widget.count1),
+                  TabItem(title: widget.title2, count: widget.count2),
+                  TabItem(title: widget.title3, count: widget.count3),
                 ],
               ),
             ),
@@ -90,19 +96,13 @@ class _CustomTabBarState extends State<CustomTabBar>
               controller: _tabController,
               children: [
                 Flexible(
-                  child: ListView(
-                    children: widget.children1
-                  ),
+                  child: ListView(children: widget.children1),
                 ),
                 Flexible(
-                  child: ListView(
-                    children:widget.children2
-                  ),
+                  child: ListView(children: widget.children2),
                 ),
                 Flexible(
-                  child: ListView(
-                    children:widget.children3
-                  ),
+                  child: ListView(children: widget.children3),
                 ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:workmate/core/configs/assets/app_images.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
@@ -9,6 +10,7 @@ import 'package:workmate/presentation/home/widgets/custom_list_view.dart';
 import 'package:workmate/presentation/home/widgets/custom_tab_bar.dart';
 import 'package:workmate/presentation/home/widgets/fitted_total_working_hour.dart';
 import 'package:workmate/presentation/home/widgets/half_background_container.dart';
+import 'package:workmate/presentation/home/widgets/rounded_small_container.dart';
 import 'package:workmate/presentation/home/widgets/task.dart';
 
 class ExpenseStatusPage extends StatelessWidget {
@@ -35,13 +37,13 @@ class ExpenseStatusPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
             CustomCard(
-              width: screenWidth * 0.29,
+              width: screenWidth * 0.26,
               title: 'Total',
               description: '\$1010', 
               widget: SvgPicture.asset(
                 AppVectors.task_progress_code,
-                width: 18,
-                height: 18,
+                 width: 16,
+                  height: 16,
 
     
                 ),
@@ -50,28 +52,20 @@ class ExpenseStatusPage extends StatelessWidget {
           
 
            CustomCard(
-              width: screenWidth * 0.3,
+              width: screenWidth * 0.31,
               title: 'Review',
               description: '\$455',
-              widget: SvgPicture.asset(
-                AppVectors.task_progress_time,
-                 width: 18,
-                height: 18,
-                ),
+              widget: RoundedSmallContainer(color: const Color(0xffF79009))
             ),
         
 
 
 
            CustomCard(
-                width: screenWidth * 0.31,
+                width: screenWidth * 0.33,
                 title: 'Allowed',
                 description: '\$555',
-                widget: SvgPicture.asset(
-                  AppVectors.task_progress_done,
-                   width: 18,
-                  height: 18,
-                  ),
+               widget: RoundedSmallContainer(color: const Color(0xff19B36E))
               ),
           
           
@@ -89,6 +83,9 @@ class ExpenseStatusPage extends StatelessWidget {
     title1: 'Review',
     title2: 'Agreed',
     title3: 'Denied',
+    count1: '3',
+    count2: '2',
+    count3: '2',
     children1: [
       ClockInOutCard(
                         date: "27 September 2024",
@@ -96,6 +93,7 @@ class ExpenseStatusPage extends StatelessWidget {
                         subtitle1: 'E-Learning',
                         title2: 'Total Expense',
                         subtitle2: '\$55',
+                        isApprovedOrRejected: false,
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
@@ -108,6 +106,7 @@ class ExpenseStatusPage extends StatelessWidget {
                         title1: 'Type',
                         subtitle1: 'E-Learning',
                         title2: 'Total Expense',
+                        isApprovedOrRejected: false,
                         subtitle2: '\$55',
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
@@ -124,13 +123,14 @@ const SizedBox(height: 20),
                         subtitle1: 'E-Learning',
                         title2: 'Total Expense',
                         subtitle2: '\$55',
+                        isApprovedOrRejected: false,
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
                           height: 25,
                         ),
                       ),
-                      
+           const SizedBox(height: 20),           
     ],
 
 
@@ -142,11 +142,44 @@ const SizedBox(height: 20),
                         subtitle1: 'E-Learning',
                         title2: 'Total Expense',
                         subtitle2: '\$55',
+                        isApprovedOrRejected: true,
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
                           height: 25,
                         ),
+                        messageIcon: SvgPicture.asset(
+                  AppVectors.task_progress_done,
+                   width: 14,
+                  height: 14,
+                  ),
+                        message: Text(
+                          'Approved at 19 Sept 2024',
+                          
+                          style: TextStyle(
+                            color: const Color(0xff19B36E),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13
+                          ),
+                          ),
+
+                          donebyImage: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Image.asset(
+                          AppImages.profile,
+                          fit: BoxFit.cover,
+                           width: 30,
+                          height: 30,
+                        ),
+                      ),
+                        donebyName: Text(
+                          "Elaine",
+                          style: TextStyle(
+                            color: const Color(0xff101828),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),
+                          ),
                       ),
                       const SizedBox(height: 20),
                       ClockInOutCard(
@@ -155,13 +188,45 @@ const SizedBox(height: 20),
                         subtitle1: 'E-Learning',
                         title2: 'Total Expense',
                         subtitle2: '\$55',
+                        isApprovedOrRejected: true,
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
                           height: 25,
                         ),
+                      messageIcon: SvgPicture.asset(
+                  AppVectors.task_progress_done,
+                   width: 14,
+                  height: 14,
+                  ),
+                      message: Text(
+                          'Approved at 19 Sept 2024',
+                          
+                          style: TextStyle(
+                            color: const Color(0xff19B36E),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13
+                          ),
+                          ),
+                          donebyImage: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Image.asset(
+                          AppImages.profile,
+                          fit: BoxFit.cover,
+                          width: 30,
+                          height: 30,
+                        ),
                       ),
-
+                        donebyName: Text(
+                          "Elaine",
+                          style: TextStyle(
+                            color: const Color(0xff101828),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),
+                          ),
+                      ),
+const SizedBox(height: 20),
     ],
 
 
@@ -169,27 +234,91 @@ const SizedBox(height: 20),
        ClockInOutCard(
                         date: "27 September 2024",
                         title1: 'Type',
-                        subtitle1: 'E-Learning',
+                        subtitle1: 'Business Trip',
                         title2: 'Total Expense',
-                        subtitle2: '\$55',
+                        subtitle2: '\$100',
+                        isApprovedOrRejected: true,
+                        message: Text(
+                          'Rejected at 28 Sept 2024',
+                          
+                          style: TextStyle(
+                            color: const Color(0xffF95555),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13
+                          ),
+                          ),
+                          messageIcon: SvgPicture.asset(
+                  AppVectors.expense_status_rejected_logo,
+                   width: 14,
+                  height: 14,
+                  ),
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
                           height: 25,
                         ),
+                        donebyImage: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Image.asset(
+                          AppImages.profile,
+                          fit: BoxFit.cover,
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                        donebyName: Text(
+                          "Elaine",
+                          style: TextStyle(
+                            color: const Color(0xff101828),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),
+                          ),
                       ),
                       const SizedBox(height: 20),
                       ClockInOutCard(
                         date: "24 September 2024",
                         title1: 'Type',
-                        subtitle1: 'E-Learning',
+                        subtitle1: 'Business Trip',
                         title2: 'Total Expense',
-                        subtitle2: '\$55',
+                        subtitle2: '\$100',
+                        isApprovedOrRejected: true,
+                        message: Text(
+                          'Rejected at 28 Sept 2024',
+                          
+                          style: TextStyle(
+                            color: const Color(0xffF95555),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13
+                          ),
+                          ),
+                          messageIcon: SvgPicture.asset(
+                  AppVectors.expense_status_rejected_logo,
+                   width: 14,
+                  height: 14,
+                  ),
                         image: SvgPicture.asset(
                           AppVectors.expense_status_date,
                           width: 25,
                           height: 25,
                         ),
+                        donebyImage: ClipRRect(
+                        borderRadius: BorderRadius.circular(120),
+                        child: Image.asset(
+                          AppImages.profile,
+                          fit: BoxFit.cover,
+                          width: 30,
+                          height: 30,
+                        ),
+                      ),
+                        donebyName: Text(
+                          "Elaine",
+                          style: TextStyle(
+                            color: const Color(0xff101828),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),
+                          ),
                       ),
 const SizedBox(height: 20),
 

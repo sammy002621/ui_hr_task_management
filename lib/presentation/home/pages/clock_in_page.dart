@@ -77,6 +77,7 @@ class ClockInPage extends StatelessWidget {
       subtitle1: '08:00:00 hrs',
       title2: 'Duration',
       subtitle2: '09:00 — 05:00 PM',
+      isApprovedOrRejected: false,
     ),
     ClockInOutCard(
       date: "26 September 2024",
@@ -84,6 +85,7 @@ class ClockInPage extends StatelessWidget {
       subtitle1: '08:00:00 hrs',
       title2: 'Duration',
       subtitle2: '09:00 — 05:00 PM',
+      isApprovedOrRejected: false,
     ),
     ClockInOutCard(
       date: "25 September 2024",
@@ -91,6 +93,7 @@ class ClockInPage extends StatelessWidget {
       subtitle1: '08:00:00 hrs',
       title2: 'Duration',
       subtitle2: '09:00 — 05:00 PM',
+      isApprovedOrRejected: false,
     ),
   ];
     return Scaffold(

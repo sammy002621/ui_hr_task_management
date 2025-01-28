@@ -9,15 +9,25 @@ class ClockInOutCard extends StatelessWidget {
   final String title2;
   final String subtitle1;
   final String subtitle2;
-  const ClockInOutCard(
-      {super.key,
-      required this.date,
-      this.image,
-      required this.title1,
-      required this.title2,
-      required this.subtitle1,
-      required this.subtitle2,
-      });
+  final Widget? messageIcon;
+  final Widget? message;
+  final Widget? donebyImage;
+  final Widget? donebyName;
+  final bool? isApprovedOrRejected;
+  const ClockInOutCard({
+    super.key,
+    required this.date,
+    this.image,
+    required this.title1,
+    required this.title2,
+    required this.subtitle1,
+    required this.subtitle2,
+    this.messageIcon,
+    this.message,
+    this.donebyImage,
+    this.donebyName,
+    required this.isApprovedOrRejected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,6 +143,8 @@ class ClockInOutCard extends StatelessWidget {
                                 fontSize: 17,
                               ),
                             ),
+
+                            // approved or rejected message
                           ],
                         )
                       ],
@@ -140,6 +152,53 @@ class ClockInOutCard extends StatelessWidget {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    // message and icon
+
+                    messageIcon ?? SizedBox.shrink(),
+
+                    const SizedBox(
+                      width: 5,
+                    ),
+
+                    message ?? SizedBox.shrink()
+                  ],
+                ),
+                Row(
+                  children: [
+                    // done by message & image
+
+                    isApprovedOrRejected == true ? Text(
+                      "by",
+                      style: TextStyle(
+                            color: const Color(0xff101828),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                          ),
+                      
+                      ) : SizedBox.shrink(),
+
+                    const SizedBox(
+                      width: 3,
+                    ),
+
+                    donebyImage ?? SizedBox.shrink(),
+                    
+                    const SizedBox(
+                      width: 3,
+                    ),
+                    donebyName ?? SizedBox.shrink()
+                  ],
+                )
+              ],
             )
           ],
         ),

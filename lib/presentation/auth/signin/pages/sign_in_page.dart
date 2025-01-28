@@ -282,7 +282,7 @@ class _SignInPageState extends State<SignInPage> {
           ),
 
           const SizedBox(
-            height: 40,
+            height: 25,
           ),
           //password
 
@@ -321,7 +321,7 @@ class _SignInPageState extends State<SignInPage> {
                     Text(
                       "Remember Me",
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                     )
                   ],
                 ),
@@ -333,7 +333,7 @@ class _SignInPageState extends State<SignInPage> {
                       "Forgot Password",
                       style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500),
                     ))
               ],

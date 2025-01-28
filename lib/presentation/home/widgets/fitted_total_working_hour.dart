@@ -27,7 +27,7 @@ class FittedTotalWorkingHour extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(15)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 15),
+          padding: const EdgeInsets.only(left: 13, top: 15, right: 13,bottom:0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

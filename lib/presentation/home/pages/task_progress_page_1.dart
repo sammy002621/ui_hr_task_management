@@ -42,13 +42,13 @@ class TaskProgressPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
             CustomCard(
-              width: screenWidth * 0.3,
+              width: screenWidth * 0.28,
               title: 'To Do',
               description: "5", 
               widget: SvgPicture.asset(
                 AppVectors.task_progress_code,
-                width: 18,
-                height: 18,
+                width: 16,
+                  height: 16,
 
     
                 ),
@@ -57,13 +57,13 @@ class TaskProgressPage extends StatelessWidget {
           
 
            CustomCard(
-              width: screenWidth * 0.33,
+              width: screenWidth * 0.35,
               title: 'Progress',
               description: "2",
               widget: SvgPicture.asset(
                 AppVectors.task_progress_time,
-                 width: 18,
-                height: 18,
+                 width: 16,
+                  height: 16,
                 ),
             ),
         
@@ -76,8 +76,8 @@ class TaskProgressPage extends StatelessWidget {
                 description: "1",
                 widget: SvgPicture.asset(
                   AppVectors.task_progress_done,
-                   width: 18,
-                  height: 18,
+                   width: 16,
+                  height: 16,
                   ),
               ),
           
@@ -190,7 +190,9 @@ belowWidgetSpace: 10,
     title1: 'All',
     title2: 'Doing',
     title3: 'Finish',
-
+    count1: '3',
+    count2: '2',
+    count3: '2',
     children1: [
       Task(
                         title: "Wiring Dashboard Analytics",

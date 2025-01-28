@@ -63,7 +63,7 @@ class _LabelTextfieldState extends State<LabelTextfield> {
             child: Text(
               widget.label,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 17,
                 color: AppColors.descriptionColor,
               ),
             ),
@@ -101,7 +101,7 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                     hintText: widget.hintText,
                     hintStyle: TextStyle(
                       color: AppColors.hintColor,
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                     prefixIcon: Padding(
@@ -109,14 +109,14 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                       child: Icon(
                             widget.prefixIcon,
                             color: AppColors.primaryColor,
-                            size: 30,
+                            size: 25,
                           ) ??
                           SizedBox.shrink()
                     ),
                     suffixIcon: Icon(
                       widget.suffixIcon,
                       color: AppColors.primaryColor,
-                      size: 30,
+                      size: 25,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),

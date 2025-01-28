@@ -47,4 +47,10 @@ class AppVectors {
 
       static final expense_status_date =
       "${basePath}expense_status_date_logo$ext";
+
+      static final expense_status_rejected_logo =
+      "${basePath}expense_status_rejected$ext";
+
+      static final leave_review_logo =
+      "${basePath}leave_review_logo$ext";
 }
