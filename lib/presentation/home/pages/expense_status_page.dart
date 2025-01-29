@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:workmate/core/configs/assets/app_images.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/home/widgets/bottom_button.dart';
 import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
 import 'package:workmate/presentation/home/widgets/custom_avatar_stack.dart';
 import 'package:workmate/presentation/home/widgets/custom_card.dart';
@@ -320,12 +321,14 @@ const SizedBox(height: 20),
                           ),
                           ),
                       ),
-const SizedBox(height: 20),
+
 
 
     ],
   ),
-  )
+  ),
+
+    const SizedBox(height: 20,)
     ];
 
     return Scaffold(
@@ -341,6 +344,7 @@ const SizedBox(height: 20),
                 )),
 
             CustomListView(cards: cards),
+            BottomButton(buttonTitle: 'Submit Expense'),
           ],
         ));
   }

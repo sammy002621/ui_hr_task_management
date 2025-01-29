@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/home/widgets/bottom_button.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
 import 'package:workmate/presentation/home/widgets/custom_avatar_stack.dart';
@@ -204,6 +205,11 @@ belowWidgetSpace: 10,
                         profiles: CustomAvatarStack(),
                       ),
                       
+const SizedBox(height: 8),
+                       Task(
+                        title: "Wiring Dashboard Analytics",
+                        profiles: CustomAvatarStack(),
+                      ),
     ],
 
 
@@ -232,7 +238,10 @@ belowWidgetSpace: 10,
                       ),
     ],
   ),
-  )
+  ),
+
+
+  const SizedBox(height: 20,)
 
      
 
@@ -252,6 +261,8 @@ belowWidgetSpace: 10,
                 )),
 
             CustomListView(cards: cards),
+
+            BottomButton(buttonTitle: 'Create Task')
 
 
             

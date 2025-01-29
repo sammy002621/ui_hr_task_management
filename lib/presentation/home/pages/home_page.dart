@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
 
                             Image.asset(
                               AppImages.camera_home,
-                              width: 110,
+                              width: 90,
                             ),
                           ],
                         ),
