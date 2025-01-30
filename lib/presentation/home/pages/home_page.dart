@@ -75,12 +75,16 @@ class _HomePageState extends State<HomePage> {
                           ),
                           const SizedBox(height: 5),
                           // role
-                          Text(
-                            "Full Stack Developer",
+                          SizedBox(
+                            width: 140,
+                            child: Text(
+                            "Junior Full Stack Developer",
                             style: TextStyle(
                               color: const Color(0xff6E62FF),
                               fontSize: 16,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           )
                         ],
                       )

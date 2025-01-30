@@ -5,7 +5,11 @@ class TabItem extends StatelessWidget {
   final String title;
   final String count;
   final bool isSelected;
-  const TabItem({super.key, required this.title, required this.count, required this.isSelected});
+  const TabItem(
+      {super.key,
+      required this.title,
+      required this.count,
+      required this.isSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +17,18 @@ class TabItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: isSelected ? Colors.white :AppColors.descriptionColor),
-            overflow: TextOverflow.ellipsis,
+          SizedBox(
+            width: 50,
+            child: Text(
+              title,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                  color:
+                      isSelected ? Colors.white : AppColors.descriptionColor),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+            ),
           ),
           int.parse(count) > 0
               ? FittedBox(
@@ -27,7 +36,9 @@ class TabItem extends StatelessWidget {
                     margin: const EdgeInsetsDirectional.only(start: 5),
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                        color: isSelected ? Color(0xffF95555) : Color(0xffD0D5DD), shape: BoxShape.circle),
+                        color:
+                            isSelected ? Color(0xffF95555) : Color(0xffD0D5DD),
+                        shape: BoxShape.circle),
                     child: Center(
                         child: Text(
                       int.parse(count) > 9 ? '9+' : count,

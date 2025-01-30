@@ -110,8 +110,8 @@ class _SignInPageState extends State<SignInPage> {
                 decoration: InputDecoration(
                     hintStyle: TextStyle(color: const Color(0xffEAECF0))),
                 borderRadius: BorderRadius.circular(15),
-                fieldWidth: 53,
-                numberOfFields: 4,
+                fieldWidth: 48,
+                numberOfFields: 6,
                 borderColor: Color(0xFFFEFEFE),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true,
@@ -127,7 +127,7 @@ class _SignInPageState extends State<SignInPage> {
                 children: [
                   RichText(
                       text: TextSpan(
-                          text: "Haven't received the verification code? ",
+                          text: "Haven't received the  code? ",
                           style: TextStyle(
                               color: const Color(0xff263238),
                               fontSize: 17,

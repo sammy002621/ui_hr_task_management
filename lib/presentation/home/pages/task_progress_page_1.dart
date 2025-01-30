@@ -189,7 +189,7 @@ belowWidgetSpace: 10,
   height: screenHeight * 0.5,
   child: CustomTabBar(
     title1: 'All',
-    title2: 'Doing',
+    title2: 'In Progress',
     title3: 'Finish',
     count1: '3',
     count2: '2',

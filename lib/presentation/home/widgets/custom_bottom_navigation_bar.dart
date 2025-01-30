@@ -94,7 +94,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               HugeIcon(
-                icon: HugeIcons.strokeRoundedNote04,
+                icon: HugeIcons.strokeRoundedInvoice01,
                 color: Colors.white,
               ),
               const SizedBox(height: 8),

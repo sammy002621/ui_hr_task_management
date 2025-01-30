@@ -47,7 +47,7 @@ class Meeting extends StatelessWidget {
                         title,
                         style: TextStyle(
                             color: const Color(0xff2B2B2B),
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                             fontSize: 17),
                       ),
                     ],

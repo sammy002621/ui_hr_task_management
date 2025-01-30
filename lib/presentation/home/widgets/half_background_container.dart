@@ -23,7 +23,7 @@ class HalfBackgroundContainer extends StatelessWidget {
               bottomRight: Radius.circular(30),
             )),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.only(left: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -49,12 +49,14 @@ class HalfBackgroundContainer extends StatelessWidget {
                       ),
 
                       SizedBox(
+                        width: 230,
                         child: Text(
                           subTitle,
                           style: GoogleFonts.roboto(
                               color: const Color(0xffD9D6FE),
                               fontSize: 16,
                               fontWeight: FontWeight.w500),
+                              overflow: TextOverflow.ellipsis,
                         ),
                       )
                     ],

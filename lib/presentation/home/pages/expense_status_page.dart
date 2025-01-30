@@ -64,7 +64,7 @@ class ExpenseStatusPage extends StatelessWidget {
 
            CustomCard(
                 width: screenWidth * 0.33,
-                title: 'Allowed',
+                title: 'Approved',
                 description: '\$555',
                widget: RoundedSmallContainer(color: const Color(0xff19B36E))
               ),
@@ -82,8 +82,8 @@ class ExpenseStatusPage extends StatelessWidget {
   height: screenHeight * 0.5,
   child: CustomTabBar(
     title1: 'Review',
-    title2: 'Agreed',
-    title3: 'Denied',
+    title2: 'Approved',
+    title3: 'Rejected',
     count1: '3',
     count2: '2',
     count3: '2',
@@ -323,7 +323,7 @@ const SizedBox(height: 20),
                       ),
 
 
-
+const SizedBox(height: 20),
     ],
   ),
   ),

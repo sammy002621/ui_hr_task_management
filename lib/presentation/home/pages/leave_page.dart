@@ -63,8 +63,8 @@ SizedBox(
   height: screenHeight * 0.5,
   child: CustomTabBar(
     title1: 'Review',
-    title2: 'Agreed',
-    title3: 'Denied',
+    title2: 'Approved',
+    title3: 'Rejected',
     count1: '1',
     count2: '1',
     count3: '1',

@@ -13,7 +13,7 @@ class BottomButton extends StatelessWidget {
       child: Container(
           width: double.infinity,
           height: 70,
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: BoxDecoration(color: const Color(0xffFEFEFE)),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: CustomButton(

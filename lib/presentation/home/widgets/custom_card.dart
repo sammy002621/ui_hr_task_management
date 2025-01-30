@@ -11,6 +11,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return FittedBox(
       child: Container(
         width: width,
@@ -19,7 +20,7 @@ class CustomCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             border: Border.all(width: 2, color: const Color(0xffEAECF0))),
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -35,14 +36,16 @@ class CustomCard extends StatelessWidget {
                   ),
                   // text
 
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: AppColors.descriptionColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
-                  ),
+                   Expanded(  // Add this
+      child: Text(
+        title,
+        style: TextStyle(
+          color: AppColors.descriptionColor,
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
+        overflow: TextOverflow.ellipsis,
+      ),),
                 ],
               ),
 

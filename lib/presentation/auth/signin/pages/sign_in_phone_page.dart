@@ -76,8 +76,8 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                   )
                 ),
                 borderRadius: BorderRadius.circular(15),
-                fieldWidth: 53,
-                numberOfFields: 4,
+                fieldWidth: 48,
+                numberOfFields: 6,
                 borderColor: Color(0xFFFEFEFE),
                 //set to true to show as box or false to show as dash
                 showFieldAsBox: true,
