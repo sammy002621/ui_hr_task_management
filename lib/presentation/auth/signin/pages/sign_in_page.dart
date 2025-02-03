@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
+import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_emp_page.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart';
@@ -39,6 +40,7 @@ class _SignInPageState extends State<SignInPage> {
 
   void forgotPassword() {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -68,13 +70,16 @@ class _SignInPageState extends State<SignInPage> {
                   onTap: forgotPassword2,
                   width: 340,
                   height: 60),
-              isTextorButton: false);
+              isTextorButton: false,
+              iconPath: AppVectors.centered_phone_icon,
+              );
         });
   }
 
   void forgotPassword2() {
     Navigator.pop(context);
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -153,13 +158,16 @@ class _SignInPageState extends State<SignInPage> {
                   onTap: forgotPassword3,
                   width: 340,
                   height: 60),
-              isTextorButton: false);
+              isTextorButton: false,
+              iconPath: AppVectors.centered_phone_icon,
+              );
         });
   }
 
   void forgotPassword3() {
     Navigator.pop(context);
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -204,6 +212,7 @@ class _SignInPageState extends State<SignInPage> {
             isTextorButton: false,
             belowTextFieldheight: 0,
             otpheight: 25,
+            iconPath: AppVectors.centered_phone_icon,
           );
         });
   }
@@ -211,6 +220,7 @@ class _SignInPageState extends State<SignInPage> {
   void forgotPassword4() {
     Navigator.pop(context);
     showModalBottomSheet(
+      backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -229,6 +239,7 @@ class _SignInPageState extends State<SignInPage> {
             isTextorButton: false,
             belowTextFieldheight: 0,
             otpheight: 25,
+            iconPath: AppVectors.centered_phone_icon,
           );
         });
   }

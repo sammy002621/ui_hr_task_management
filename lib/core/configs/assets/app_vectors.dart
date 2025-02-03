@@ -53,4 +53,13 @@ class AppVectors {
 
       static final leave_review_logo =
       "${basePath}leave_review_logo$ext";
+
+      static final centered_phone_icon =
+      "${basePath}centered_phone_icon$ext";
+
+      static final centered_mail_icon =
+      "${basePath}centered_mail_icon$ext";
+
+      static final centered_profile_icon =
+      "${basePath}centered_profile_icon$ext";
 }

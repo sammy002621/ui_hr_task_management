@@ -42,6 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void navigateWelcome(){
   Navigator.pop(context);
 showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -74,6 +75,7 @@ showModalBottomSheet(
               isTextorButton: false,
               descriptionheight: 0,
               otpheight: 0,
+              iconPath: AppVectors.centered_profile_icon,
               );
         });
 
@@ -86,6 +88,7 @@ showModalBottomSheet(
 
   void _navigatePhoneSignup() {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -164,6 +167,7 @@ showModalBottomSheet(
                 width:MediaQuery.of(context).size.width * 0.9, 
                 height: 60,),
               isTextorButton: true,
+              iconPath: AppVectors.centered_mail_icon,
               );
         });
   }

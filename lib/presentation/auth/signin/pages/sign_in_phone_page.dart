@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
+import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_emp_page.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
@@ -30,6 +31,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
 
   void _navigatePhoneSignin() {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
@@ -146,6 +148,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       ]))
                 ],
               ),
+              iconPath: AppVectors.centered_phone_icon,
               );
         });
   }
@@ -157,7 +160,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
 
   void _navigateHome() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const HomePage()));
+        context, MaterialPageRoute(builder: (context) => const MainHomeScreen()));
   }
 
   @override
