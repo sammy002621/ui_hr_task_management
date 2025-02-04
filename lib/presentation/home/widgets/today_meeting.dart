@@ -24,7 +24,7 @@ class TodayMeeting extends StatelessWidget {
         color: Colors.white,
       ),
       child: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

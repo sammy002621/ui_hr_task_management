@@ -19,7 +19,7 @@ class Meeting extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: AppColors.bgColor),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

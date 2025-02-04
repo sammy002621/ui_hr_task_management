@@ -71,6 +71,8 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       fontSize: 17,
                       fontWeight: FontWeight.w500))
                   ])),
+
+                  descriptionheight: 16,
           content:OtpTextField(
                 decoration:InputDecoration(
                   hintStyle: TextStyle(
@@ -94,7 +96,9 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                 title: "Submit",
                 onTap: _navigateHome,
                width: MediaQuery.of(context).size.width * 0.9,
-                height: 60,),
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
               belowTextField: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -121,7 +125,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       ]))
                 ],
               ),
-              
+              belowTextFieldheight: 15,
               messageText: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -148,7 +152,10 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       ]))
                 ],
               ),
+              belowButton1height: 10,
               iconPath: AppVectors.centered_phone_icon,
+              belowTextOrButtonheight: 10,
+              
               );
         });
   }
@@ -242,7 +249,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                     Text(
                       "Remember Me",
                       style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                     )
                   ],
                 ),
@@ -254,7 +261,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       "Forgot Password",
                       style: TextStyle(
                           color: AppColors.primaryColor,
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500),
                     ))
               ],
@@ -271,6 +278,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
             onTap: _navigatePhoneSignin,
             width:MediaQuery.of(context).size.width * 0.9,
             height: 60,
+            color: AppColors.primaryColor,
           ),
 
           const SizedBox(
@@ -335,7 +343,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           ),
 
           const SizedBox(
-            height: 40,
+            height: 30,
           ),
 
           // sign up
@@ -367,7 +375,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
             ],
           ),
 
-          const SizedBox(height: 30,)
+          const SizedBox(height: 15,)
         ],
       ),
     ));

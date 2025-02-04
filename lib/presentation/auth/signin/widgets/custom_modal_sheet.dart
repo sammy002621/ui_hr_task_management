@@ -26,6 +26,9 @@ class CustomModalSheet extends StatefulWidget {
   final double? descriptionheight;
   final double? otpheight;
   final double? belowTextFieldheight;
+  final double? belowButton1height;
+  final double? belowTextOrButtonheight;
+  final double? topPosition;
   const CustomModalSheet({
     super.key,
     required this.iconPath,
@@ -40,6 +43,9 @@ class CustomModalSheet extends StatefulWidget {
     this.descriptionheight,
     this.otpheight,
     this.belowTextFieldheight,
+    this.belowButton1height,
+    this.belowTextOrButtonheight,
+    this.topPosition,
   });
 
   @override
@@ -103,11 +109,11 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
                       widget.belowTextField ?? SizedBox.shrink(),
                       SizedBox(height: widget.belowTextFieldheight ?? 35),
                       widget.button1,
-                      const SizedBox(height: 20),
+                       SizedBox(height:widget.belowButton1height ?? 20),
                       widget.isTextorButton
                           ? widget.messageText ?? SizedBox.shrink()
                           : widget.button2 ?? SizedBox.shrink(),
-                      const SizedBox(height: 20),
+                       SizedBox(height:widget.belowTextOrButtonheight ?? 20),
                     ],
                   ),
                 ),
@@ -115,7 +121,7 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
             ),
 
             Positioned(
-              top: -65,
+              top:widget.topPosition ?? -65,
               left: context.parentWidth * 0.35,
               child: CenteredContainer(
                   borderRadius: 20,

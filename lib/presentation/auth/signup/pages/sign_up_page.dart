@@ -61,7 +61,9 @@ showModalBottomSheet(
                 title: "Set Up My Profile",
                 onTap: _navigateProfile,
                 width: MediaQuery.of(context).size.width * 0.9, 
-                height: 60,),
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
               
               button2: CustomButton(
                 title: "Explore The App First",
@@ -76,6 +78,9 @@ showModalBottomSheet(
               descriptionheight: 0,
               otpheight: 0,
               iconPath: AppVectors.centered_profile_icon,
+              belowTextOrButtonheight: 10,
+              belowTextFieldheight: 20,
+              topPosition: -50,
               );
         });
 
@@ -165,9 +170,14 @@ showModalBottomSheet(
                 title: "Submit",
                 onTap: navigateWelcome,
                 width:MediaQuery.of(context).size.width * 0.9, 
-                height: 60,),
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
               isTextorButton: true,
               iconPath: AppVectors.centered_mail_icon,
+              belowTextFieldheight: 20,
+              belowButton1height: 5,
+              belowTextOrButtonheight: 5,
               );
         });
   }
@@ -329,7 +339,9 @@ showModalBottomSheet(
                 title: "Sign Up",
                 onTap: _navigatePhoneSignup,
                 width: 20,
-                height: 60),
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
           ),
 
           const SizedBox(

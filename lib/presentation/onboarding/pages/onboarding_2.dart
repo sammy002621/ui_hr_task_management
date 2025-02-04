@@ -52,7 +52,7 @@ class Onboarding2 extends StatelessWidget {
                     fontWeight: FontWeight.w600
                   ),
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                  maxLines: 2,
                   ),
                 const SizedBox(
                   height: 20,

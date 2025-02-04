@@ -69,9 +69,16 @@ class _SignInPageState extends State<SignInPage> {
                   title: "Send Verification Code",
                   onTap: forgotPassword2,
                   width: 340,
-                  height: 60),
+                  height: 60,
+                  color: AppColors.primaryColor,
+                  ),
               isTextorButton: false,
               iconPath: AppVectors.centered_phone_icon,
+              belowTextFieldheight: 10,
+              otpheight: 10,
+              belowButton1height: 5,
+              belowTextOrButtonheight: 5,
+              topPosition: -50,
               );
         });
   }
@@ -157,9 +164,14 @@ class _SignInPageState extends State<SignInPage> {
                   title: "Submit",
                   onTap: forgotPassword3,
                   width: 340,
-                  height: 60),
+                  height: 60,
+                  color: AppColors.primaryColor,
+                  ),
               isTextorButton: false,
               iconPath: AppVectors.centered_phone_icon,
+              belowTextFieldheight: 20,
+              belowButton1height: 5,
+              belowTextOrButtonheight: 5,
               );
         });
   }
@@ -193,7 +205,7 @@ class _SignInPageState extends State<SignInPage> {
                 ),
 
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
 
                 LabelTextfield(
@@ -208,11 +220,15 @@ class _SignInPageState extends State<SignInPage> {
                 title: "Submit",
                 onTap: forgotPassword4,
                 width: 340,
-                height: 60),
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
             isTextorButton: false,
             belowTextFieldheight: 0,
             otpheight: 25,
             iconPath: AppVectors.centered_phone_icon,
+            belowButton1height: 5,
+            belowTextOrButtonheight: 5,
           );
         });
   }
@@ -235,11 +251,20 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.w500),
             )),
             button1: CustomButton(
-                title: "Sign in", onTap: _navigateHome, width: 340, height: 60),
+                title: "Sign in", 
+                onTap: _navigateHome, 
+                width: 340, 
+                height: 60,
+                color: AppColors.primaryColor,
+                ),
             isTextorButton: false,
             belowTextFieldheight: 0,
+            descriptionheight: 5,
             otpheight: 25,
             iconPath: AppVectors.centered_phone_icon,
+            belowButton1height: 5,
+            belowTextOrButtonheight: 5,
+            topPosition: -5,
           );
         });
   }
@@ -361,6 +386,7 @@ class _SignInPageState extends State<SignInPage> {
             onTap: _navigateHome,
             width: MediaQuery.of(context).size.width * 0.9,
             height: 60,
+            color: AppColors.primaryColor,
           ),
 
           const SizedBox(
