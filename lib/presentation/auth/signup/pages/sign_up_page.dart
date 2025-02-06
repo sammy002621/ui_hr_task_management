@@ -11,6 +11,7 @@ import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
+import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 import 'package:workmate/presentation/onboarding/widgets/next_button.dart';
@@ -249,15 +250,11 @@ showModalBottomSheet(
             height: 25,
           ),
           // phone number
-
-          LabelTextfield(
-            label: "Phone Number",
-            hintText: "+62 0000 0000 0000",
-            prefixIcon: Icons.keyboard_arrow_down,
-          ),
+PhoneLabelTextfield(label: 'Phone Number'),
+          
 
           const SizedBox(
-            height: 25,
+            height: 10,
           ),
 
           // company id
@@ -336,13 +333,19 @@ showModalBottomSheet(
                           children: <TextSpan>[
                     TextSpan(
                       text: "terms & conditions ",
-                      style: TextStyle(color: AppColors.primaryColor),
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontWeight: FontWeight.w500
+                        ),
                     ),
                     TextSpan(
                         text: "and ", style: TextStyle(color: Colors.black)),
                     TextSpan(
                         text: "privacy policy",
-                        style: TextStyle(color: AppColors.primaryColor))
+                        style: TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w500
+                          ))
                   ])))
             ],
           ),

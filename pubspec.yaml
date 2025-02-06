@@ -43,6 +43,7 @@ dependencies:
   hugeicons: ^0.0.7
   dotted_border: ^2.1.0
   google_fonts: ^6.2.1
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:
