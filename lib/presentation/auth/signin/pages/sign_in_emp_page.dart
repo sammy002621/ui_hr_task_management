@@ -20,6 +20,9 @@ class SignInEmpPage extends StatefulWidget {
 class _SignInEmpPageState extends State<SignInEmpPage> {
   bool isSelected = false;
 
+  TextEditingController empIDController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   void _navigateEmailSignin(){
     Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage()));
   }
@@ -82,6 +85,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
           
               suffixIcon:
                 Icons.visibility_outlined,
+              textController: empIDController,
               ),
 
           const SizedBox(
@@ -97,6 +101,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
             prefixIcon: Icons.document_scanner,
             suffixIcon:
               Icons.visibility_outlined,
+            textController: passwordController,
           ),
 
           // remember me

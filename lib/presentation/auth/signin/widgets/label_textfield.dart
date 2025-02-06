@@ -12,12 +12,14 @@ class LabelTextfield extends StatefulWidget {
   final String? inputType;
   final bool? obscureText;
   final double? padding;
+  final TextEditingController textController;
   final List<String>? dropdownItems; // List of dropdown items (country codes)
   void Function()? onTap;
   LabelTextfield({
     super.key,
     required this.label,
     required this.hintText,
+    required this.textController,
     this.prefixIcon,
     this.inputType,
     this.suffixIcon,
@@ -33,7 +35,7 @@ class LabelTextfield extends StatefulWidget {
 
 class _LabelTextfieldState extends State<LabelTextfield> {
   String? selectedDropdownValue; // Selected dropdown value
-  TextEditingController textController = TextEditingController();
+
 
   TextInputType getKeyboardInputType(String inputType) {
     switch (inputType.toLowerCase()) {
@@ -76,31 +78,11 @@ class _LabelTextfieldState extends State<LabelTextfield> {
           // Dropdown and TextField
           Row(
             children: [
-              if (widget.dropdownItems !=
-                  null) // Add dropdown if items are provided
-                DropdownButton<String>(
-                  value: selectedDropdownValue,
-                  hint: Text("Code"),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedDropdownValue = newValue;
-                      textController.text =
-                          "$selectedDropdownValue ${textController.text}";
-                    });
-                  },
-                  items: widget.dropdownItems!
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
               BlocBuilder<SignupCubit,SignupState>(
                 builder: (context,state) {
                 return Expanded(
                   child: TextField(
-                    controller: textController,
+                    controller: widget.textController,
                     obscureText: widget.obscureText ?? false,
                     keyboardType:
                         getKeyboardInputType(widget.inputType ?? 'text'),

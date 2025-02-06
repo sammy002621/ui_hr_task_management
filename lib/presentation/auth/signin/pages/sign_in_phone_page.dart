@@ -10,6 +10,7 @@ import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart'
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
+import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
@@ -23,6 +24,10 @@ class SignInPhonePage extends StatefulWidget {
 
 class _SignInPhonePageState extends State<SignInPhonePage> {
   bool isSelected = false;
+  
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   void _navigateEmployeeSignin() {
     Navigator.push(context,
@@ -215,13 +220,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           ),
           //password
 
-          LabelTextfield(
-            inputType: "phone",
-            label: "Phone Number",
-            hintText: "+62 821 0000 0000",
-            prefixIcon: Icons.phone,
-            dropdownItems: ['+1', '+62', '+91'],
-          ),
+          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,),
 
           // remember me
 

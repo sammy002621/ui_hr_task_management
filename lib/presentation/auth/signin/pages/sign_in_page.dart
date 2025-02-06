@@ -23,6 +23,8 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   bool isSelected = false;
 
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   void _navigateEmployeeSignin() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const SignInEmpPage()));
@@ -62,6 +64,7 @@ class _SignInPageState extends State<SignInPage> {
                     label: "Email",
                     hintText: "My email",
                     prefixIcon: Icons.mail,
+                    textController: emailController,
                   )
                 ],
               ),
@@ -202,6 +205,7 @@ class _SignInPageState extends State<SignInPage> {
                   hintText: "Input Password",
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
+                  textController:passwordController ,
                 ),
 
                 const SizedBox(
@@ -213,6 +217,7 @@ class _SignInPageState extends State<SignInPage> {
                   hintText: "Re Enter Your Password",
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
+                  textController: passwordController,
                 )
               ],
             ),
@@ -315,6 +320,7 @@ class _SignInPageState extends State<SignInPage> {
             label: "Email",
             hintText: "My Email",
             prefixIcon: Icons.mail,
+            textController: emailController,
           ),
 
           const SizedBox(
@@ -329,6 +335,7 @@ class _SignInPageState extends State<SignInPage> {
             hintText: "My Password",
             prefixIcon: Icons.document_scanner,
             suffixIcon: Icons.visibility_off_outlined,
+            textController: passwordController,
           ),
 
           // remember me
