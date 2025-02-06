@@ -1,10 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
@@ -271,12 +274,22 @@ showModalBottomSheet(
 
           // password
 
-          LabelTextfield(
+         BlocBuilder<SignupCubit,SignupState>(
+          builder: (context,state){
+          return Column(
+            children: [
+               LabelTextfield(
             label: "Password",
             hintText: "My Password",
             prefixIcon: Icons.document_scanner,
-            suffixIcon: Icons.visibility_off_outlined,
+            suffixIcon: state.obscure1 ? Icons.visibility_off_outlined : Icons.visibility,
+            obscureText: state.obscure1,
+            onTap: () {
+              context.read<SignupCubit>().updateObscure1();
+            },
           ),
+
+          
 
           const SizedBox(
             height: 25,
@@ -287,12 +300,19 @@ showModalBottomSheet(
             label: "Confirm Password",
             hintText: "My Password",
             prefixIcon: Icons.document_scanner,
-            suffixIcon: Icons.visibility_off_outlined,
+            suffixIcon: state.obscure2 ? Icons.visibility_off_outlined : Icons.visibility,
+            obscureText: state.obscure2,
+            onTap: () {
+              context.read<SignupCubit>().updateObscure2();
+            },
           ),
 
           const SizedBox(
             height: 15,
           ),
+            ],
+          );
+         }),
           // agree to terms and conditions
 
           Row(
