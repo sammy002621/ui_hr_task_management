@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 
@@ -15,9 +16,6 @@ class PhoneLabelTextfield extends StatefulWidget {
     this.controller,
     this.padding,
   });
-
-
-  
 
   @override
   _PhoneLabelTextfieldState createState() => _PhoneLabelTextfieldState();
@@ -46,6 +44,9 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
           ),
           // Dropdown and TextField
           IntlPhoneField(
+            onCountryChanged: (country) {
+              context.read<PhoneNumberCubit>().changeDialCode(country.dialCode);
+            },
             controller: widget.controller,
             decoration: InputDecoration(
               floatingLabelBehavior: FloatingLabelBehavior.never,

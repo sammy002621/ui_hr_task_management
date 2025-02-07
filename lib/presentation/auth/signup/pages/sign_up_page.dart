@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
@@ -34,6 +37,16 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
 
+  // FUNCTION TO GET THE CURRENT DIAL CODE  and the number itself
+  String getCompleteNumber(String typedNumber) {
+    var completeNumber =
+        context.read<PhoneNumberCubit>().state.dialCode.toString() +
+            typedNumber;
+    print('THE COMPLETE NUMBER IS : ____________________________________$completeNumber');
+    return context.read<PhoneNumberCubit>().state.dialCode.toString() +
+        typedNumber;
+  }
+
   void _navigateHome() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const MainHomeScreen()));
@@ -46,20 +59,29 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void navigateWelcome() async {
     // get the necessary fields and make the api request
-    var url = Uri.http('10.12.74.43:5000', '/api/register');
-    var response = await http.post(url, body: {
-      'email': emailController.text,
-      'phone': phoneController.text,
-      'compID': compIDController.text,
-      'password': passwordController.text,
-    });
+    try {
+      var url = Uri.http('10.12.74.43:5000', '/api/register');
+      var response = await http.post(url, body: {
+        'email': emailController.text,
+        'phone': getCompleteNumber(phoneController.text),
+        'compID': compIDController.text,
+        'password': passwordController.text,
+      });
 
-    print('RESPONSE email IS: $response');
-    emailController.clear();
-    phoneController.clear();
-    compIDController.clear();
-    passwordController.clear();
-    passwordController1.clear();
+      print('RESPONSE IS : $response');
+      emailController.clear();
+      phoneController.clear();
+      compIDController.clear();
+      passwordController.clear();
+      passwordController1.clear();
+    } on SocketException catch (e) {
+      // Handle network errors
+      print('Network error occurred: $e');
+      // Show user-friendly message
+    } catch (e) {
+      // Handle other types of errors
+      print('Error occurred: $e');
+    }
 
     // Navigator.pop(context);
     // showModalBottomSheet(
