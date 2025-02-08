@@ -82,6 +82,15 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
                 ),
               ),
 
+              focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(color: Colors.red,width: 2.0,),
+    ),
+        errorStyle: TextStyle(
+          color: Colors.red,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        )
               // errorText: 'Invalid Phone Number'
             ),
             initialCountryCode: 'IN',

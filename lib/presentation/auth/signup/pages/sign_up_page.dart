@@ -35,17 +35,105 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController compIDController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordController1 = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   // FUNCTION TO GET THE CURRENT DIAL CODE  and the number itself
   String getCompleteNumber(String typedNumber) {
     var completeNumber =
-        context.read<PhoneNumberCubit>().state.dialCode.toString() +
-            typedNumber;
-    print('THE COMPLETE NUMBER IS : ____________________________________$completeNumber');
-    return context.read<PhoneNumberCubit>().state.dialCode.toString() +
-        typedNumber;
+        '+${context.read<PhoneNumberCubit>().state.dialCode}$typedNumber';
+    print(
+        'THE COMPLETE NUMBER IS : ____________________________________$completeNumber');
+    return completeNumber;
   }
+
+
+  // function to validate email 
+
+  String? Function(String?)? validateEmail = (String? email) {
+  if (email == null || email.isEmpty) return "Please enter valid email";
+  final regex = RegExp(r"^[^@]+@[^@]+\.[a-zA-Z]{2,}$");
+  return regex.hasMatch(email) ? null : "Please enter valid email";
+};
+
+
+// function to validate company ID
+
+String? Function(String?) validateCompanyId = (String? companyId) {
+  if (companyId == null || companyId.isEmpty) {
+    return "Company ID is required";
+  }
+  
+  if (!companyId.startsWith("COMP-")) {
+    return "ID should start with COMP-";
+  }
+
+  // Remove "COMP-" and check if remaining part is exactly 8 characters
+  String remainingPart = companyId.substring(5); // 5 is length of "COMP-"
+  if (remainingPart.length != 8) {
+    return "8 characters required after COMP-";
+  }
+
+  return null; // Return null when validation passes
+};
+
+
+
+
+// function to validate password 
+
+String? Function(String?) validatePassword = (String? password) {
+  if (password == null || password.isEmpty) {
+    return "Password required";
+  }
+
+  if (password.length < 8) {
+    return "Min 8 characters";
+  }
+
+  bool hasUppercase = password.contains(RegExp(r'[A-Z]'));
+  bool hasLowercase = password.contains(RegExp(r'[a-z]'));
+  bool hasDigit = password.contains(RegExp(r'[0-9]'));
+  bool hasSpecialChar = password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+
+  if (!hasUppercase) {
+    return "Add uppercase letter";
+  }
+  
+  if (!hasLowercase) {
+    return "Add lowercase letter";
+  }
+
+  if (!hasDigit) {
+    return "Add a number";
+  }
+
+  if (!hasSpecialChar) {
+    return "Add special char (!@#\$...)";
+  }
+
+  return null;
+};
+
+
+// function to confirm password 
+
+String? Function(String?) validateConfirmPassword(String? password) {
+  return (String? confirmPassword) {
+    if (confirmPassword == null || confirmPassword.isEmpty) {
+      return "Password required";
+    }
+    
+    if (confirmPassword != password) {
+      return "Passwords must match";
+    }
+    
+    return null;
+  };
+}
+
+
 
   void _navigateHome() {
     Navigator.push(context,
@@ -73,14 +161,16 @@ class _SignUpPageState extends State<SignUpPage> {
       phoneController.clear();
       compIDController.clear();
       passwordController.clear();
-      passwordController1.clear();
+      confirmPasswordController.clear();
     } on SocketException catch (e) {
       // Handle network errors
-      print('Network error occurred: $e');
+      print(
+          'NETWORK ERROR OCCURED ___________________________________________: $e');
       // Show user-friendly message
     } catch (e) {
       // Handle other types of errors
-      print('Error occurred: $e');
+      print(
+          'ERROR OCCURED ____________________________________________________: $e');
     }
 
     // Navigator.pop(context);
@@ -265,86 +355,96 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 25,
           ),
 
-          // email
-          LabelTextfield(
-            label: "Email",
-            hintText: "Enter Your Email",
-            prefixIcon: Icons.mail,
-            textController: emailController,
-          ),
+          Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  // email
+                  LabelTextfield(
+                    label: "Email",
+                    hintText: "Enter Your Email",
+                    prefixIcon: Icons.mail,
+                    textController: emailController,
+                    validator: validateEmail,
+                  ),
 
-          const SizedBox(
-            height: 25,
-          ),
-          // phone number
-          PhoneLabelTextfield(
-            label: 'Phone Number',
-            controller: phoneController,
-          ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  // phone number
+                  PhoneLabelTextfield(
+                    label: 'Phone Number',
+                    controller: phoneController,
+                  ),
 
-          const SizedBox(
-            height: 10,
-          ),
+                  const SizedBox(
+                    height: 10,
+                  ),
 
-          // company id
+                  // company id
 
-          LabelTextfield(
-            label: "Company ID",
-            hintText: "COMP-9F1A2B3C",
-            prefixIcon: Icons.shopping_bag,
-            textController: compIDController,
-          ),
+                  LabelTextfield(
+                    label: "Company ID",
+                    hintText: "COMP-9F1A2B3C",
+                    prefixIcon: Icons.shopping_bag,
+                    textController: compIDController,
+                    validator: validateCompanyId,
+                  ),
 
-          const SizedBox(
-            height: 25,
-          ),
+                  const SizedBox(
+                    height: 25,
+                  ),
 
-          // password
+                  // password
 
-          BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
-            return Column(
-              children: [
-                LabelTextfield(
-                  label: "Password",
-                  hintText: "My Password",
-                  prefixIcon: Icons.document_scanner,
-                  suffixIcon: state.obscure1
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility,
-                  obscureText: state.obscure1,
-                  onTap: () {
-                    context.read<SignupCubit>().updateObscure1();
-                  },
-                  textController: passwordController,
-                ),
+                  BlocBuilder<SignupCubit, SignupState>(
+                      builder: (context, state) {
+                    return Column(
+                      children: [
+                        LabelTextfield(
+                          label: "Password",
+                          hintText: "My Password",
+                          prefixIcon: Icons.document_scanner,
+                          suffixIcon: state.obscure1
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility,
+                          obscureText: state.obscure1,
+                          onTap: () {
+                            context.read<SignupCubit>().updateObscure1();
+                          },
+                          textController: passwordController,
+                          validator: validatePassword,
+                        ),
 
-                const SizedBox(
-                  height: 25,
-                ),
-                // confirm password
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        // confirm password
 
-                LabelTextfield(
-                  label: "Confirm Password",
-                  hintText: "My Password",
-                  prefixIcon: Icons.document_scanner,
-                  suffixIcon: state.obscure2
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility,
-                  obscureText: state.obscure2,
-                  onTap: () {
-                    context.read<SignupCubit>().updateObscure2();
-                  },
-                  textController: passwordController1,
-                ),
+                        LabelTextfield(
+                          label: "Confirm Password",
+                          hintText: "My Password",
+                          prefixIcon: Icons.document_scanner,
+                          suffixIcon: state.obscure2
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility,
+                          obscureText: state.obscure2,
+                          onTap: () {
+                            context.read<SignupCubit>().updateObscure2();
+                          },
+                          textController: confirmPasswordController,
+                          validator: validateConfirmPassword(passwordController.text),
+                        ),
 
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
-            );
-          }),
-          // agree to terms and conditions
-
+                        const SizedBox(
+                          height: 15,
+                        ),
+                      ],
+                    );
+                  }),
+                  // agree to terms and conditions
+                ],
+              )),
           Row(
             children: [
               // checkbox

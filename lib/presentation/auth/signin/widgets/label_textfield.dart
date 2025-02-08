@@ -14,6 +14,7 @@ class LabelTextfield extends StatefulWidget {
   final double? padding;
   final TextEditingController textController;
   final List<String>? dropdownItems; // List of dropdown items (country codes)
+  final String? Function(String?)? validator;
   void Function()? onTap;
   LabelTextfield({
     super.key,
@@ -27,6 +28,7 @@ class LabelTextfield extends StatefulWidget {
     this.dropdownItems,
     this.padding,
     this.onTap,
+    this.validator,
   });
 
   @override
@@ -81,7 +83,9 @@ class _LabelTextfieldState extends State<LabelTextfield> {
               BlocBuilder<SignupCubit,SignupState>(
                 builder: (context,state) {
                 return Expanded(
-                  child: TextField(
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator:widget.validator ,
                     controller: widget.textController,
                     obscureText: widget.obscureText ?? false,
                     keyboardType:
@@ -124,7 +128,32 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                           width: 2.0,
                         ),
                       ),
+
+                    errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.red,
+                          width: 2.0,
+                        ),
+                      ),
+
+                    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(color: Colors.red,width: 2.0,),
+    ),
+
+     errorStyle: TextStyle(
+          color: Colors.red,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        )
+
+                    
+                      
                     ),
+
+                    
+                    
                   ),
                 );
               })
