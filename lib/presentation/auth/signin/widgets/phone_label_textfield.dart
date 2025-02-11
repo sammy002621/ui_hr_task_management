@@ -47,60 +47,74 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
           ),
           // Dropdown and TextField
 
-          //NOTE:' since this is a custom package i would be able to directly change it into a textFormField and that's among the ways that the function onChange can do it's work of validating the input as well as the others 
-          IntlPhoneField(
-            onCountryChanged: (country) {
-              context.read<PhoneNumberCubit>().changeDialCode(country.dialCode);
-            },
-            controller: widget.controller,
-            decoration: InputDecoration(
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              labelText: 'Phone Number',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(),
-              ),
-              labelStyle: TextStyle(
-                color: AppColors.hintColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: AppColors.hintColor,
-                  width: 2.0,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: AppColors.primaryColor,
-                  width: 2.0,
-                ),
-              ),
-
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(
-                  color: Colors.red,
-                  width: 2.0,
-                ),
-              ),
-
-              focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Colors.red,width: 2.0,),
-    ),
-        errorStyle: TextStyle(
-          color: Colors.red,
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-        )
-              // errorText: 'Invalid Phone Number'
-            ),
-            initialCountryCode: 'IN',
-            onChanged: widget.onChanged ,
-          ),
+          // NOTE: the only thing that is left is to make sure that the user should type anything in the text field of the number because if they don't then they can submit incomplete information
+          // NOTE: the package has it's own validation logic but is there a way to add my own validation logic too
+          // NOTE: my logic is that the controller.text.length should atleast be equal to one
+          FormField<PhoneNumber>(builder: (state) {
+            return IntlPhoneField(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              validator: (phone) {
+                if (phone == null || widget.controller!.text.isEmpty) {
+                  return 'Phone number is required';
+                }
+                return null;
+              },
+              onCountryChanged: (country) {
+                context
+                    .read<PhoneNumberCubit>()
+                    .changeDialCode(country.dialCode);
+              },
+              controller: widget.controller,
+              decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
+                  labelStyle: TextStyle(
+                    color: AppColors.hintColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: AppColors.hintColor,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: AppColors.primaryColor,
+                      width: 2.0,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(
+                      color: Colors.red,
+                      width: 2.0,
+                    ),
+                  ),
+                  errorStyle: TextStyle(
+                    color: Colors.red,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  )
+                  // errorText: 'Invalid Phone Number'
+                  ),
+              initialCountryCode: 'IN',
+              onChanged: widget.onChanged,
+            );
+          })
         ],
       ),
     );
