@@ -14,6 +14,7 @@ import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/validators/signup_validators.dart';
 
 class SignInPhonePage extends StatefulWidget {
   const SignInPhonePage({super.key});
@@ -28,6 +29,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   void _navigateEmployeeSignin() {
     Navigator.push(context,
@@ -220,7 +222,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           ),
           //password
 
-          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,),
+          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,onChanged: (phone) => SignupValidators.validateForm(context, _formKey),),
 
           // remember me
 

@@ -15,12 +15,14 @@ class LabelTextfield extends StatefulWidget {
   final TextEditingController textController;
   final List<String>? dropdownItems; // List of dropdown items (country codes)
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   void Function()? onTap;
   LabelTextfield({
     super.key,
     required this.label,
     required this.hintText,
     required this.textController,
+    required this.onChanged,
     this.prefixIcon,
     this.inputType,
     this.suffixIcon,
@@ -78,6 +80,8 @@ class _LabelTextfieldState extends State<LabelTextfield> {
             ),
           ),
           // Dropdown and TextField
+
+          
           Row(
             children: [
               BlocBuilder<SignupCubit,SignupState>(
@@ -85,6 +89,7 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                 return Expanded(
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
+                    onChanged:widget.onChanged,
                     validator:widget.validator ,
                     controller: widget.textController,
                     obscureText: widget.obscureText ?? false,

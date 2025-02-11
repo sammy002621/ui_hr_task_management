@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
@@ -10,9 +11,11 @@ class PhoneLabelTextfield extends StatefulWidget {
   final String label;
   final double? padding;
   final TextEditingController? controller;
+  final void Function(PhoneNumber phoneNumber)? onChanged;
   PhoneLabelTextfield({
     super.key,
     required this.label,
+    required this.onChanged,
     this.controller,
     this.padding,
   });
@@ -43,6 +46,8 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
             ),
           ),
           // Dropdown and TextField
+
+          //NOTE:' since this is a custom package i would be able to directly change it into a textFormField and that's among the ways that the function onChange can do it's work of validating the input as well as the others 
           IntlPhoneField(
             onCountryChanged: (country) {
               context.read<PhoneNumberCubit>().changeDialCode(country.dialCode);
@@ -94,9 +99,7 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
               // errorText: 'Invalid Phone Number'
             ),
             initialCountryCode: 'IN',
-            onChanged: (phone) {
-              print(phone.completeNumber);
-            },
+            onChanged: widget.onChanged ,
           ),
         ],
       ),

@@ -12,6 +12,7 @@ import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/validators/signup_validators.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -25,6 +26,8 @@ class _SignInPageState extends State<SignInPage> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
   void _navigateEmployeeSignin() {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => const SignInEmpPage()));
@@ -65,6 +68,8 @@ class _SignInPageState extends State<SignInPage> {
                     hintText: "My email",
                     prefixIcon: Icons.mail,
                     textController: emailController,
+                    validator: SignupValidators.validateEmail,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                   )
                 ],
               ),
@@ -205,7 +210,9 @@ class _SignInPageState extends State<SignInPage> {
                   hintText: "Input Password",
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
-                  textController:passwordController ,
+                  textController:passwordController,
+                  validator: SignupValidators.validatePassword,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                 ),
 
                 const SizedBox(
@@ -218,6 +225,8 @@ class _SignInPageState extends State<SignInPage> {
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
                   textController: passwordController,
+                  validator: SignupValidators.validatePassword,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                 )
               ],
             ),
@@ -321,6 +330,8 @@ class _SignInPageState extends State<SignInPage> {
             hintText: "My Email",
             prefixIcon: Icons.mail,
             textController: emailController,
+            validator: SignupValidators.validatePassword,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
           ),
 
           const SizedBox(
@@ -336,6 +347,8 @@ class _SignInPageState extends State<SignInPage> {
             prefixIcon: Icons.document_scanner,
             suffixIcon: Icons.visibility_off_outlined,
             textController: passwordController,
+            validator: SignupValidators.validatePassword,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
           ),
 
           // remember me

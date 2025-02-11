@@ -9,6 +9,7 @@ import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/validators/signup_validators.dart';
 
 class SignInEmpPage extends StatefulWidget {
   const SignInEmpPage({super.key});
@@ -22,6 +23,8 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
 
   TextEditingController empIDController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   void _navigateEmailSignin(){
     Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage()));
@@ -86,6 +89,8 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
               suffixIcon:
                 Icons.visibility_outlined,
               textController: empIDController,
+              validator: SignupValidators.validateCompanyId,
+              onChanged: (value) => SignupValidators.validateForm(context,_formKey),
               ),
 
           const SizedBox(
@@ -102,6 +107,8 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
             suffixIcon:
               Icons.visibility_outlined,
             textController: passwordController,
+            validator: SignupValidators.validatePassword,
+            onChanged: (value) => SignupValidators.validateForm(context,_formKey),
           ),
 
           // remember me

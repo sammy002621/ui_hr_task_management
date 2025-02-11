@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
+import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 import 'package:workmate/presentation/home/bloc/cubit/navigation_cubit.dart';
-import 'package:workmate/presentation/home/widgets/custom_tab_bar.dart';
 import 'package:workmate/presentation/onboarding/bloc/cubit/onboarding_cubit.dart';
 import 'package:workmate/presentation/onboarding/pages/splash_page.dart';
 
@@ -21,7 +21,7 @@ void main() {
      BlocProvider(create: (context) => NavigationCubit()),
      BlocProvider(create: (context) => SignupCubit()),
      BlocProvider(create: (context) => PhoneNumberCubit()),
-
+     BlocProvider(create: (context) => TextFormCubit()),
     ], child: const MyApp())
     
     );

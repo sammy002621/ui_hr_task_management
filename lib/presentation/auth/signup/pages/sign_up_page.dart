@@ -6,20 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
+import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
+import 'package:workmate/presentation/auth/signup/bloc/text_form_state.dart';
+import 'package:workmate/services/navigation_service.dart';
+import 'package:workmate/validators/signup_validators.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
-import 'package:workmate/presentation/home/pages/home_page.dart';
-import 'package:workmate/presentation/home/pages/main_home_screen.dart';
-import 'package:workmate/presentation/onboarding/widgets/next_button.dart';
-import 'package:workmate/presentation/profile/pages/profile_page.dart';
 import 'package:http/http.dart' as http;
+
+// TODO: carefully read and understand the different layers of  clean architecture and how they should work
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -48,102 +49,6 @@ class _SignUpPageState extends State<SignUpPage> {
     return completeNumber;
   }
 
-
-  // function to validate email 
-
-  String? Function(String?)? validateEmail = (String? email) {
-  if (email == null || email.isEmpty) return "Please enter valid email";
-  final regex = RegExp(r"^[^@]+@[^@]+\.[a-zA-Z]{2,}$");
-  return regex.hasMatch(email) ? null : "Please enter valid email";
-};
-
-
-// function to validate company ID
-
-String? Function(String?) validateCompanyId = (String? companyId) {
-  if (companyId == null || companyId.isEmpty) {
-    return "Company ID is required";
-  }
-  
-  if (!companyId.startsWith("COMP-")) {
-    return "ID should start with COMP-";
-  }
-
-  // Remove "COMP-" and check if remaining part is exactly 8 characters
-  String remainingPart = companyId.substring(5); // 5 is length of "COMP-"
-  if (remainingPart.length != 8) {
-    return "8 characters required after COMP-";
-  }
-
-  return null; // Return null when validation passes
-};
-
-
-
-
-// function to validate password 
-
-String? Function(String?) validatePassword = (String? password) {
-  if (password == null || password.isEmpty) {
-    return "Password required";
-  }
-
-  if (password.length < 8) {
-    return "Min 8 characters";
-  }
-
-  bool hasUppercase = password.contains(RegExp(r'[A-Z]'));
-  bool hasLowercase = password.contains(RegExp(r'[a-z]'));
-  bool hasDigit = password.contains(RegExp(r'[0-9]'));
-  bool hasSpecialChar = password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-
-  if (!hasUppercase) {
-    return "Add uppercase letter";
-  }
-  
-  if (!hasLowercase) {
-    return "Add lowercase letter";
-  }
-
-  if (!hasDigit) {
-    return "Add a number";
-  }
-
-  if (!hasSpecialChar) {
-    return "Add special char (!@#\$...)";
-  }
-
-  return null;
-};
-
-
-// function to confirm password 
-
-String? Function(String?) validateConfirmPassword(String? password) {
-  return (String? confirmPassword) {
-    if (confirmPassword == null || confirmPassword.isEmpty) {
-      return "Password required";
-    }
-    
-    if (confirmPassword != password) {
-      return "Passwords must match";
-    }
-    
-    return null;
-  };
-}
-
-
-
-  void _navigateHome() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const MainHomeScreen()));
-  }
-
-  void _navigateProfile() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const ProfilePage()));
-  }
 
   void navigateWelcome() async {
     // get the necessary fields and make the api request
@@ -265,7 +170,7 @@ String? Function(String?) validateConfirmPassword(String? password) {
               children: [
                 RichText(
                     text: TextSpan(
-                        text: "Havent Received the  code?  ",
+                        text: "Haven't Received the  code?  ",
                         style: TextStyle(
                             color: const Color(0xff263238),
                             fontSize: 17,
@@ -365,7 +270,8 @@ String? Function(String?) validateConfirmPassword(String? password) {
                     hintText: "Enter Your Email",
                     prefixIcon: Icons.mail,
                     textController: emailController,
-                    validator: validateEmail,
+                    validator: SignupValidators.validateEmail,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                   ),
 
                   const SizedBox(
@@ -375,6 +281,7 @@ String? Function(String?) validateConfirmPassword(String? password) {
                   PhoneLabelTextfield(
                     label: 'Phone Number',
                     controller: phoneController,
+                    onChanged: (phone) => SignupValidators.validateForm(context, _formKey),
                   ),
 
                   const SizedBox(
@@ -388,7 +295,8 @@ String? Function(String?) validateConfirmPassword(String? password) {
                     hintText: "COMP-9F1A2B3C",
                     prefixIcon: Icons.shopping_bag,
                     textController: compIDController,
-                    validator: validateCompanyId,
+                    validator: SignupValidators.validateCompanyId,
+                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                   ),
 
                   const SizedBox(
@@ -413,7 +321,8 @@ String? Function(String?) validateConfirmPassword(String? password) {
                             context.read<SignupCubit>().updateObscure1();
                           },
                           textController: passwordController,
-                          validator: validatePassword,
+                          validator: SignupValidators.validatePassword,
+                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -433,7 +342,9 @@ String? Function(String?) validateConfirmPassword(String? password) {
                             context.read<SignupCubit>().updateObscure2();
                           },
                           textController: confirmPasswordController,
-                          validator: validateConfirmPassword(passwordController.text),
+                          validator: SignupValidators.validateConfirmPassword(
+                              passwordController.text),
+                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -487,16 +398,19 @@ String? Function(String?) validateConfirmPassword(String? password) {
 
           // sign up button
 
-          Padding(
+          BlocBuilder<TextFormCubit,TextFormState>(
+            builder: (context,state){
+            return Padding(
             padding: const EdgeInsets.all(5),
             child: CustomButton(
               title: "Sign Up",
-              onTap: navigateWelcome,
+              onTap: state.isFormValid ? navigateWelcome : (){},
               width: 20,
               height: 60,
-              color: AppColors.primaryColor,
+              color: state.isFormValid ? AppColors.primaryColor : AppColors.primaryColor.withAlpha(128),
             ),
-          ),
+          );
+          }),
 
           const SizedBox(
             height: 30,
@@ -515,12 +429,7 @@ String? Function(String?) validateConfirmPassword(String? password) {
                         text: "Sign in here",
                         style: TextStyle(color: AppColors.primaryColor),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignInPage()));
-                          })
+                          ..onTap = () => NavigationService.navigateSignin(context))
                   ]))
             ],
           ),
