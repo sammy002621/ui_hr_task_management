@@ -4,15 +4,14 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
-import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
-import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
+import 'package:workmate/validators/signup_validators.dart';
 
 class PhoneLabelTextfield extends StatefulWidget {
   final String label;
   final double? padding;
   final TextEditingController? controller;
   final void Function(PhoneNumber phoneNumber)? onChanged;
-  PhoneLabelTextfield({
+   const PhoneLabelTextfield({
     super.key,
     required this.label,
     required this.onChanged,
@@ -21,6 +20,7 @@ class PhoneLabelTextfield extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _PhoneLabelTextfieldState createState() => _PhoneLabelTextfieldState();
 }
 
@@ -47,18 +47,10 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
           ),
           // Dropdown and TextField
 
-          // NOTE: the only thing that is left is to make sure that the user should type anything in the text field of the number because if they don't then they can submit incomplete information
-          // NOTE: the package has it's own validation logic but is there a way to add my own validation logic too
-          // NOTE: my logic is that the controller.text.length should atleast be equal to one
           FormField<PhoneNumber>(builder: (state) {
             return IntlPhoneField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator: (phone) {
-                if (phone == null || widget.controller!.text.isEmpty) {
-                  return 'Phone number is required';
-                }
-                return null;
-              },
+              validator:(phone) => SignupValidators.validatePhoneNumber(phone,widget.controller),
               onCountryChanged: (country) {
                 context
                     .read<PhoneNumberCubit>()
