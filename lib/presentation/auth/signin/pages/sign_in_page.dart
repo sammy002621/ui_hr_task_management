@@ -1,17 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_emp_page.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/pages/home_page.dart';
-import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 import 'package:workmate/services/navigation_service.dart';
 import 'package:workmate/validators/signup_validators.dart';
 
@@ -29,15 +28,7 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  void _navigateEmployeeSignin() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SignInEmpPage()));
-  }
 
-  void _navigatePhoneSignin() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SignInPhonePage()));
-  }
 
 
   void forgotPassword() {
@@ -77,12 +68,12 @@ class _SignInPageState extends State<SignInPage> {
                   height: 60,
                   color: AppColors.primaryColor,
                   ),
-              isTextorButton: false,
+              isTextOrButton: false,
               iconPath: AppVectors.centered_phone_icon,
-              belowTextFieldheight: 10,
-              otpheight: 10,
+              belowTextFieldHeight: 10,
+              otpHeight: 10,
               belowButton1height: 5,
-              belowTextOrButtonheight: 5,
+              belowTextOrButtonHeight: 5,
               topPosition: -50,
               );
         });
@@ -172,11 +163,11 @@ class _SignInPageState extends State<SignInPage> {
                   height: 60,
                   color: AppColors.primaryColor,
                   ),
-              isTextorButton: false,
+              isTextOrButton: false,
               iconPath: AppVectors.centered_phone_icon,
-              belowTextFieldheight: 20,
+              belowTextFieldHeight: 20,
               belowButton1height: 5,
-              belowTextOrButtonheight: 5,
+              belowTextOrButtonHeight: 5,
               );
         });
   }
@@ -234,12 +225,12 @@ class _SignInPageState extends State<SignInPage> {
                 height: 60,
                 color: AppColors.primaryColor,
                 ),
-            isTextorButton: false,
-            belowTextFieldheight: 0,
-            otpheight: 25,
+            isTextOrButton: false,
+            belowTextFieldHeight: 0,
+            otpHeight: 25,
             iconPath: AppVectors.centered_phone_icon,
             belowButton1height: 5,
-            belowTextOrButtonheight: 5,
+            belowTextOrButtonHeight: 5,
           );
         });
   }
@@ -268,13 +259,13 @@ class _SignInPageState extends State<SignInPage> {
                 height: 60,
                 color: AppColors.primaryColor,
                 ),
-            isTextorButton: false,
-            belowTextFieldheight: 0,
-            descriptionheight: 5,
-            otpheight: 25,
+            isTextOrButton: false,
+            belowTextFieldHeight: 0,
+            descriptionHeight: 5,
+            otpHeight: 25,
             iconPath: AppVectors.centered_phone_icon,
             belowButton1height: 5,
-            belowTextOrButtonheight: 5,
+            belowTextOrButtonHeight: 5,
             topPosition: -5,
           );
         });
@@ -359,18 +350,17 @@ class _SignInPageState extends State<SignInPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Checkbox(
-                      value: isSelected,
-                      onChanged: (value) {
-                        setState(() {
-                          isSelected = value!;
-                        });
-                      },
+                    BlocBuilder<SignupCubit,SignupState>(
+                      builder: (context,state){
+                      return Checkbox(
+                      value: state.isSelected,
+                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
                       checkColor: AppColors.primaryColor,
                       activeColor: const Color.fromARGB(255, 214, 213, 213),
                       side:
                           BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    ),
+                    );
+                    }),
                     Text(
                       "Remember Me",
                       style:
@@ -454,7 +444,7 @@ class _SignInPageState extends State<SignInPage> {
               Icons.person,
               color: const Color(0xff6938EF),
             ),
-            onTap: _navigateEmployeeSignin,
+            onTap: () => NavigationService.navigateEmployeeSignin(context),
           ),
 
           const SizedBox(
@@ -464,7 +454,7 @@ class _SignInPageState extends State<SignInPage> {
           CustomIconButton(
             title: "Sign in With Phone",
             icon: Icon(Icons.phone, color: const Color(0xff6938EF)),
-            onTap: _navigatePhoneSignin,
+            onTap: () => NavigationService.navigatePhoneSignin(context),
           ),
 
           const SizedBox(

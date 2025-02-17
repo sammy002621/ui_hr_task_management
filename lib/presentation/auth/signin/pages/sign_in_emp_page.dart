@@ -1,13 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
-import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/services/navigation_service.dart';
 import 'package:workmate/validators/signup_validators.dart';
 
 class SignInEmpPage extends StatefulWidget {
@@ -24,18 +24,6 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
   TextEditingController passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-
-  void _navigateEmailSignin(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPage()));
-  }
-
-  void _navigatePhoneSignin(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignInPhonePage()));
-  }
-
-  void _navigateHome(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const MainHomeScreen()));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,18 +109,17 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Checkbox(
-                      value: isSelected,
-                      onChanged: (value) {
-                        setState(() {
-                          isSelected = value!;
-                        });
-                      },
+                    BlocBuilder<SignupCubit,SignupState>(
+                      builder: (context,state){
+                      return Checkbox(
+                      value: state.isSelected,
+                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
                       checkColor: AppColors.primaryColor,
                       activeColor: const Color.fromARGB(255, 214, 213, 213),
                       side:
                           BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    ),
+                    );
+                    }),
                     Text(
                       "Remember Me",
                       style:
@@ -142,6 +129,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
                 ),
 
 // forgot password
+//NOTE: implement the forgot password logic 
                 TextButton(
                     onPressed: (){},
                     child: Text(
@@ -160,7 +148,11 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
           ),
 
           // sign in
-          CustomButton(title: "Sign In", onTap: _navigateHome,width: MediaQuery.of(context).size.width * 0.9, height: 60,),
+          CustomButton(
+            title: "Sign In", 
+            onTap: () => NavigationService.navigateHome(context),
+            width: MediaQuery.of(context).size.width * 0.9, 
+            height: 60,),
 
           const SizedBox(
             height: 40,
@@ -210,7 +202,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
                 Icons.mail,
                 color: const Color(0xff6938EF),
               ),
-              onTap: _navigateEmailSignin,
+              onTap: () => NavigationService.navigateSignin(context),
               ),
 
           const SizedBox(
@@ -220,7 +212,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
           CustomIconButton(
               title: "Sign in With Phone",
               icon: Icon(Icons.phone, color: const Color(0xff6938EF)),
-              onTap: _navigatePhoneSignin,
+              onTap: () => NavigationService.navigatePhoneSignin(context),
               ),
 
           const SizedBox(
@@ -246,12 +238,7 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
                           color: const Color(0xff6938EF),
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()));
-                          })
+                          ..onTap = () => NavigationService.navigateSignUp(context))
                   ]))
             ],
           ),

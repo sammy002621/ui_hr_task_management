@@ -12,7 +12,7 @@ import 'package:workmate/presentation/home/widgets/centered_container.dart';
 
 // description height
 // otp height
-// belowTextFieldheight
+// belowTextFieldHeight
 class CustomModalSheet extends StatefulWidget {
   final String iconPath;
   final String title;
@@ -22,12 +22,12 @@ class CustomModalSheet extends StatefulWidget {
   final Widget button1;
   final Widget? messageText;
   final Widget? button2;
-  final bool isTextorButton;
-  final double? descriptionheight;
-  final double? otpheight;
-  final double? belowTextFieldheight;
+  final bool isTextOrButton;
+  final double? descriptionHeight;
+  final double? otpHeight;
+  final double? belowTextFieldHeight;
   final double? belowButton1height;
-  final double? belowTextOrButtonheight;
+  final double? belowTextOrButtonHeight;
   final double? topPosition;
   const CustomModalSheet({
     super.key,
@@ -38,13 +38,13 @@ class CustomModalSheet extends StatefulWidget {
     required this.button1,
     this.messageText,
     this.button2,
-    required this.isTextorButton,
+    required this.isTextOrButton,
     this.content,
-    this.descriptionheight,
-    this.otpheight,
-    this.belowTextFieldheight,
+    this.descriptionHeight,
+    this.otpHeight,
+    this.belowTextFieldHeight,
     this.belowButton1height,
-    this.belowTextOrButtonheight,
+    this.belowTextOrButtonHeight,
     this.topPosition,
   });
 
@@ -53,10 +53,6 @@ class CustomModalSheet extends StatefulWidget {
 }
 
 class _CustomModalSheetState extends State<CustomModalSheet> {
-  void _navigateHome() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const MainHomeScreen()));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,17 +99,17 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
                           child: widget.description,
                         ),
                       ),
-                      SizedBox(height: widget.descriptionheight ?? 20),
+                      SizedBox(height: widget.descriptionHeight ?? 20),
                       widget.content ?? SizedBox.shrink(),
-                      SizedBox(height: widget.otpheight ?? 20),
+                      SizedBox(height: widget.otpHeight ?? 20),
                       widget.belowTextField ?? SizedBox.shrink(),
-                      SizedBox(height: widget.belowTextFieldheight ?? 35),
+                      SizedBox(height: widget.belowTextFieldHeight ?? 35),
                       widget.button1,
                        SizedBox(height:widget.belowButton1height ?? 20),
-                      widget.isTextorButton
+                      widget.isTextOrButton
                           ? widget.messageText ?? SizedBox.shrink()
                           : widget.button2 ?? SizedBox.shrink(),
-                       SizedBox(height:widget.belowTextOrButtonheight ?? 20),
+                       SizedBox(height:widget.belowTextOrButtonHeight ?? 20),
                     ],
                   ),
                 ),

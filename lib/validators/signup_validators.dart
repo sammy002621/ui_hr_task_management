@@ -1,6 +1,4 @@
 // class to hand signup validation
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -33,7 +31,7 @@ class SignupValidators {
     return null; // Return null when validation passes
   };
 
-// function to valid the password
+// function to validate the password
 
   static String? Function(String?) validatePassword = (String? password) {
     if (password == null || password.isEmpty) {
@@ -98,7 +96,7 @@ static String? validatePhoneNumber(PhoneNumber? phone,TextEditingController? con
 
 // function to check if the whole form is validated
   static void validateForm(BuildContext context, GlobalKey<FormState> formKey) {
-    // Check if the form is valid
+    // Check if the whole form is valid
     final isValid = formKey.currentState?.validate() ?? false;
     context.read<TextFormCubit>().updateIsFormValid(isValid);
     print(context.read<TextFormCubit>().state.isFormValid);

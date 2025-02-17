@@ -1,19 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_emp_page.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_page.dart';
-import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
+import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
-import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/pages/home_page.dart';
-import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/services/navigation_service.dart';
 import 'package:workmate/validators/signup_validators.dart';
 
 class SignInPhonePage extends StatefulWidget {
@@ -24,17 +22,10 @@ class SignInPhonePage extends StatefulWidget {
 }
 
 class _SignInPhonePageState extends State<SignInPhonePage> {
-  bool isSelected = false;
-  
 
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  void _navigateEmployeeSignin() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const SignInEmpPage()));
-  }
 
   void _navigatePhoneSignin() {
     showModalBottomSheet(
@@ -43,7 +34,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
         builder: (context) {
           return CustomModalSheet(
           title: "Sign In Phone Number", 
-          isTextorButton: true,
+          isTextOrButton: true,
           description: RichText(
             
                   text: TextSpan(
@@ -79,7 +70,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       fontWeight: FontWeight.w500))
                   ])),
 
-                  descriptionheight: 16,
+                  descriptionHeight: 16,
           content:OtpTextField(
                 decoration:InputDecoration(
                   hintStyle: TextStyle(
@@ -101,7 +92,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
               ), 
               button1: CustomButton(
                 title: "Submit",
-                onTap: _navigateHome,
+                onTap: () => NavigationService.navigateHome(context),
                width: MediaQuery.of(context).size.width * 0.9,
                 height: 60,
                 color: AppColors.primaryColor,
@@ -132,7 +123,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                       ]))
                 ],
               ),
-              belowTextFieldheight: 15,
+              belowTextFieldHeight: 15,
               messageText: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -161,22 +152,11 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
               ),
               belowButton1height: 10,
               iconPath: AppVectors.centered_phone_icon,
-              belowTextOrButtonheight: 10,
+              belowTextOrButtonHeight: 10,
               
               );
         });
   }
-
-  void _navigateEmailSignin() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SignInPage()));
-  }
-
-  void _navigateHome() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MainHomeScreen()));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,18 +215,17 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Checkbox(
-                      value: isSelected,
-                      onChanged: (value) {
-                        setState(() {
-                          isSelected = value!;
-                        });
-                      },
+                    BlocBuilder<SignupCubit,SignupState>(
+                      builder: (context,state){
+                      return Checkbox(
+                      value: state.isSelected,
+                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
                       checkColor: AppColors.primaryColor,
                       activeColor: const Color.fromARGB(255, 214, 213, 213),
                       side:
                           BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    ),
+                    );
+                    }),
                     Text(
                       "Remember Me",
                       style:
@@ -256,6 +235,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                 ),
 
 // forgot password
+//NOTE: remember to implement the logic
                 TextButton(
                     onPressed: () {},
                     child: Text(
@@ -330,7 +310,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
               Icons.person,
               color: const Color(0xff6938EF),
             ),
-            onTap: _navigateEmployeeSignin,
+            onTap:() => NavigationService.navigateEmployeeSignin(context),
           ),
 
           const SizedBox(
@@ -340,7 +320,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           CustomIconButton(
             title: "Sign in With Email",
             icon: Icon(Icons.phone, color: const Color(0xff6938EF)),
-            onTap: _navigateEmailSignin,
+            onTap:() => NavigationService.navigateSignin(context),
           ),
 
           const SizedBox(
@@ -366,12 +346,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                           color: const Color(0xff6938EF),
                         ),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpPage()));
-                          })
+                          ..onTap = () => NavigationService.navigateSignUp(context))
                   ]))
             ],
           ),

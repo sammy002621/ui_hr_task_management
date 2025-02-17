@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +29,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  bool _isSelected = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -70,12 +68,12 @@ class _SignUpPageState extends State<SignUpPage> {
     } on SocketException catch (e) {
       // Handle network errors
       print(
-          'NETWORK ERROR OCCURED ___________________________________________: $e');
+          'NETWORK ERROR OCCURRED ___________________________________________: $e');
       // Show user-friendly message
     } catch (e) {
       // Handle other types of errors
       print(
-          'ERROR OCCURED ____________________________________________________: $e');
+          'ERROR OCCURRED ____________________________________________________: $e');
     }
 
     // Navigator.pop(context);
@@ -96,26 +94,26 @@ class _SignUpPageState extends State<SignUpPage> {
     //         )),
     //         button1: CustomButton(
     //           title: "Set Up My Profile",
-    //           onTap: _navigateProfile,
+    //           onTap: () => NavigationService.navigateProfile(context),
     //           width: MediaQuery.of(context).size.width * 0.9,
     //           height: 60,
     //           color: AppColors.primaryColor,
     //         ),
     //         button2: CustomButton(
     //           title: "Explore The App First",
-    //           onTap: _navigateHome,
+    //           onTap: () => NavigationService.navigateHome(context),
     //           width: MediaQuery.of(context).size.width * 0.9,
     //           height: 60,
     //           color: Colors.white,
     //           textColor: AppColors.primaryColor,
     //           borderColor: AppColors.primaryColor,
     //         ),
-    //         isTextorButton: false,
-    //         descriptionheight: 0,
-    //         otpheight: 0,
+    //         isTextOrButton: false,
+    //         descriptionHeight: 0,
+    //         otpHeight: 0,
     //         iconPath: AppVectors.centered_profile_icon,
-    //         belowTextOrButtonheight: 10,
-    //         belowTextFieldheight: 20,
+    //         belowTextOrButtonHeight: 10,
+    //         belowTextFieldHeight: 20,
     //         topPosition: -50,
     //       );
     //     });
@@ -198,11 +196,11 @@ class _SignUpPageState extends State<SignUpPage> {
               height: 60,
               color: AppColors.primaryColor,
             ),
-            isTextorButton: true,
+            isTextOrButton: true,
             iconPath: AppVectors.centered_mail_icon,
-            belowTextFieldheight: 20,
+            belowTextFieldHeight: 20,
             belowButton1height: 5,
-            belowTextOrButtonheight: 5,
+            belowTextOrButtonHeight: 5,
           );
         });
   }
@@ -359,13 +357,17 @@ class _SignUpPageState extends State<SignUpPage> {
           Row(
             children: [
               // checkbox
-              Checkbox(
-                  value: _isSelected,
-                  onChanged: (value) {
-                    setState(() {
-                      _isSelected = value!;
-                    });
-                  }),
+              BlocBuilder<SignupCubit,SignupState>(
+                      builder: (context,state){
+                      return Checkbox(
+                      value: state.isSelected,
+                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
+                      checkColor: AppColors.primaryColor,
+                      activeColor: const Color.fromARGB(255, 214, 213, 213),
+                      side:
+                          BorderSide(color: AppColors.primaryColor, width: 2.0),
+                    );
+                    }),
 
               // rich text
 
