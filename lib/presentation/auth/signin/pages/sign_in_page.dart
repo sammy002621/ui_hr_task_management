@@ -12,6 +12,7 @@ import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
+import 'package:workmate/services/navigation_service.dart';
 import 'package:workmate/validators/signup_validators.dart';
 
 class SignInPage extends StatefulWidget {
@@ -38,10 +39,6 @@ class _SignInPageState extends State<SignInPage> {
         MaterialPageRoute(builder: (context) => const SignInPhonePage()));
   }
 
-  void _navigateHome() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MainHomeScreen()));
-  }
 
   void forgotPassword() {
     showModalBottomSheet(
@@ -266,7 +263,7 @@ class _SignInPageState extends State<SignInPage> {
             )),
             button1: CustomButton(
                 title: "Sign in", 
-                onTap: _navigateHome, 
+                onTap: () => NavigationService.navigateHome(context), 
                 width: 340, 
                 height: 60,
                 color: AppColors.primaryColor,
@@ -403,7 +400,7 @@ class _SignInPageState extends State<SignInPage> {
           // sign in
           CustomButton(
             title: "Sign In",
-            onTap: _navigateHome,
+            onTap:() => NavigationService.navigateHome(context),
             width: MediaQuery.of(context).size.width * 0.9,
             height: 60,
             color: AppColors.primaryColor,

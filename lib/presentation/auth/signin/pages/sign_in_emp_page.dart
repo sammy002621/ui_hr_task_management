@@ -7,7 +7,6 @@ import 'package:workmate/presentation/auth/signin/pages/sign_in_phone_page.dart'
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/presentation/home/pages/home_page.dart';
 import 'package:workmate/presentation/home/pages/main_home_screen.dart';
 import 'package:workmate/validators/signup_validators.dart';
 
