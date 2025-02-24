@@ -5,8 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
+import 'package:workmate/data/models/create_user.dart';
+import 'package:workmate/domain/usecases/auth/sign_up_usecase.dart';
 import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 import 'package:workmate/presentation/auth/signup/bloc/text_form_state.dart';
+import 'package:workmate/service_locator.dart';
 import 'package:workmate/services/navigation_service.dart';
 import 'package:workmate/validators/signup_validators.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
@@ -17,9 +20,9 @@ import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
-import 'package:http/http.dart' as http;
 
-// TODO: carefully read and understand the different layers of  clean architecture and how they should work
+
+
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -51,20 +54,36 @@ class _SignUpPageState extends State<SignUpPage> {
   void navigateWelcome() async {
     // get the necessary fields and make the api request
     try {
-      var url = Uri.http('10.12.74.43:5000', '/api/register');
-      var response = await http.post(url, body: {
-        'email': emailController.text,
-        'phone': getCompleteNumber(phoneController.text),
-        'compID': compIDController.text,
-        'password': passwordController.text,
-      });
+      // create an instance of CreateUser
+      // pass the necessary fields
+      // call the usecase
+      // check if the response is successful
+      // if successful, navigate to the welcome page
+      // if not, show an error message
+      // clear the textfields : this will be an indicator that the user has successfully signed up
 
-      print('RESPONSE IS : $response');
+      final createUser = CreateUser(
+          email: emailController.text,
+          phone: getCompleteNumber(phoneController.text),
+          compID: compIDController.text,
+          password: passwordController.text);
+
+        final response = await sl<SignUpUsecase>().call(params: createUser);
+
+        response.fold((error){
+          print('ERROR OCCURRED ____________________________________________________: $error');
+        }, (success){
+          print('SUCCESS OCCURRED ____________________________________________________: $success');
+
       emailController.clear();
       phoneController.clear();
       compIDController.clear();
       passwordController.clear();
       confirmPasswordController.clear();
+
+        });
+      
+
     } on SocketException catch (e) {
       // Handle network errors
       print(

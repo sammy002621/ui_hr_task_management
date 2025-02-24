@@ -60,6 +60,9 @@ class AppVectors {
       static final centered_mail_icon =
       "${basePath}centered_mail_icon$ext";
 
-      static final centered_profile_icon =
+      static  final centered_profile_icon =
       "${basePath}centered_profile_icon$ext";
+
+      static final forgotPassword =
+      "${basePath}forgot_password$ext";
 }

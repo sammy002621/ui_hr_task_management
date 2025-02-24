@@ -7,8 +7,10 @@ import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 import 'package:workmate/presentation/home/bloc/cubit/navigation_cubit.dart';
 import 'package:workmate/presentation/onboarding/bloc/cubit/onboarding_cubit.dart';
 import 'package:workmate/presentation/onboarding/pages/splash_page.dart';
+import 'package:workmate/service_locator.dart';
 
-void main() {
+void main()  async{
+  await initializeDependencies();
   runApp(
     // BlocProvider(
     //   create: (context) => OnboardingCubit(),

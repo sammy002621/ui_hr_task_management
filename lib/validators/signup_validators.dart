@@ -7,7 +7,7 @@ import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 class SignupValidators {
   // function to validate the email address
   static String? Function(String?)? validateEmail = (String? email) {
-    if (email == null || email.isEmpty) return "Please enter valid email";
+    if (email == null || email.isEmpty) return "Email is required";
     final regex = RegExp(r"^[^@]+@[^@]+\.[a-zA-Z]{2,}$");
     return regex.hasMatch(email) ? null : "Please enter valid email";
   };
@@ -22,7 +22,7 @@ class SignupValidators {
       return "ID should start with COMP-";
     }
 
-    // Remove "COMP-" and check if remaining part is exactly 8 characters
+    // Remove "COMP-" and  if remaining part is exactly 8 characters
     String remainingPart = companyId.substring(5); // 5 is length of "COMP-"
     if (remainingPart.length != 6) {
       return "6 characters required after COMP-";
@@ -88,8 +88,8 @@ class SignupValidators {
 
 // function to validate the phoneNumber field 
 static String? validatePhoneNumber(PhoneNumber? phone,TextEditingController? controller){
-     if (phone!.number.isEmpty || controller!.text.isEmpty) {
-                  return "Phone Number";
+     if (phone!.number.isEmpty) {
+                  return "Phone Number is Required";
                 }
                 return null;
 }

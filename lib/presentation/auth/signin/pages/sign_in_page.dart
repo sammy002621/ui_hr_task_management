@@ -22,7 +22,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  bool isSelected = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -69,7 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                   color: AppColors.primaryColor,
                   ),
               isTextOrButton: false,
-              iconPath: AppVectors.centered_phone_icon,
+              iconPath: AppVectors.forgotPassword,
               belowTextFieldHeight: 10,
               otpHeight: 10,
               belowButton1height: 5,
@@ -164,7 +163,7 @@ class _SignInPageState extends State<SignInPage> {
                   color: AppColors.primaryColor,
                   ),
               isTextOrButton: false,
-              iconPath: AppVectors.centered_phone_icon,
+              iconPath: AppVectors.forgotPassword,
               belowTextFieldHeight: 20,
               belowButton1height: 5,
               belowTextOrButtonHeight: 5,
@@ -228,7 +227,7 @@ class _SignInPageState extends State<SignInPage> {
             isTextOrButton: false,
             belowTextFieldHeight: 0,
             otpHeight: 25,
-            iconPath: AppVectors.centered_phone_icon,
+            iconPath: AppVectors.forgotPassword,
             belowButton1height: 5,
             belowTextOrButtonHeight: 5,
           );
@@ -263,7 +262,7 @@ class _SignInPageState extends State<SignInPage> {
             belowTextFieldHeight: 0,
             descriptionHeight: 5,
             otpHeight: 25,
-            iconPath: AppVectors.centered_phone_icon,
+            iconPath: AppVectors.forgotPassword,
             belowButton1height: 5,
             belowTextOrButtonHeight: 5,
             topPosition: -5,
