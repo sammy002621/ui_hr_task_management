@@ -55,13 +55,20 @@ class _SignInPageState extends State<SignInPage> {
                     hintText: "My email",
                     prefixIcon: Icons.mail,
                     textController: emailController,
-                    validator: SignupValidators.validateEmail,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                    validator: (value) => SignupValidators.validateEmail(context, value),
+                    
                   )
                 ],
               ),
               button1: CustomButton(
-                  title: "Send Verification Code",
+                  title:Text(
+              'Send Verification Code',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
                   onTap: forgotPassword2,
                   width: 340,
                   height: 60,
@@ -156,7 +163,14 @@ class _SignInPageState extends State<SignInPage> {
                 ],
               ),
               button1: CustomButton(
-                  title: "Submit",
+                  title:Text(
+              'Submit',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
                   onTap: forgotPassword3,
                   width: 340,
                   height: 60,
@@ -198,8 +212,8 @@ class _SignInPageState extends State<SignInPage> {
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
                   textController:passwordController,
-                  validator: SignupValidators.validatePassword,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                  validator: (value) => SignupValidators.validatePassword(context, value),
+                    
                 ),
 
                 const SizedBox(
@@ -212,13 +226,20 @@ class _SignInPageState extends State<SignInPage> {
                   prefixIcon: Icons.document_scanner,
                   suffixIcon: Icons.visibility_outlined,
                   textController: passwordController,
-                  validator: SignupValidators.validatePassword,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                  validator: (value) => SignupValidators.validateConfirmPassword(context, passwordController.text, value),
+                    
                 )
               ],
             ),
             button1: CustomButton(
-                title: "Submit",
+                title:Text(
+              'Submit',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
                 onTap: forgotPassword4,
                 width: 340,
                 height: 60,
@@ -252,7 +273,14 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.w500),
             )),
             button1: CustomButton(
-                title: "Sign in", 
+                title:Text(
+              'Sign In',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ), 
                 onTap: () => NavigationService.navigateHome(context), 
                 width: 340, 
                 height: 60,
@@ -317,8 +345,8 @@ class _SignInPageState extends State<SignInPage> {
             hintText: "My Email",
             prefixIcon: Icons.mail,
             textController: emailController,
-            validator: SignupValidators.validatePassword,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+            validator: (value) => SignupValidators.validateEmail(context, value),
+                    
           ),
 
           const SizedBox(
@@ -334,8 +362,8 @@ class _SignInPageState extends State<SignInPage> {
             prefixIcon: Icons.document_scanner,
             suffixIcon: Icons.visibility_off_outlined,
             textController: passwordController,
-            validator: SignupValidators.validatePassword,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+            validator: (value) => SignupValidators.validatePassword(context, value),
+                    
           ),
 
           // remember me
@@ -388,7 +416,14 @@ class _SignInPageState extends State<SignInPage> {
 
           // sign in
           CustomButton(
-            title: "Sign In",
+            title:Text(
+              'Sign In',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             onTap:() => NavigationService.navigateHome(context),
             width: MediaQuery.of(context).size.width * 0.9,
             height: 60,

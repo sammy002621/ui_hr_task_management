@@ -139,7 +139,6 @@ class WorkProfilePage extends StatelessWidget {
                           prefixIcon: Icons.person,
                           padding: 3,
                           textController: sampleController,
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -152,7 +151,6 @@ class WorkProfilePage extends StatelessWidget {
                           prefixIcon: Icons.person,
                           padding: 3,
                           textController: sampleController,
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -166,7 +164,6 @@ class WorkProfilePage extends StatelessWidget {
                           suffixIcon: Icons.keyboard_arrow_down_rounded,
                           padding: 3,
                           textController: sampleController,
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -180,7 +177,6 @@ class WorkProfilePage extends StatelessWidget {
                           suffixIcon: Icons.keyboard_arrow_down_rounded,
                           padding: 3,
                           textController: sampleController,
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
                         ),
 
                         const SizedBox(
@@ -188,7 +184,14 @@ class WorkProfilePage extends StatelessWidget {
                         ),
 
                         CustomButton(
-                            title: "Update Profile",
+                            title:Text(
+              'Update Profile',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
                             onTap: () {},
                             width: 340,
                             height: 60)

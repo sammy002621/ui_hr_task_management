@@ -21,9 +21,6 @@ import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dar
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
 
-
-
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -32,7 +29,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController compIDController = TextEditingController();
@@ -49,7 +45,6 @@ class _SignUpPageState extends State<SignUpPage> {
         'THE COMPLETE NUMBER IS : ____________________________________$completeNumber');
     return completeNumber;
   }
-
 
   void navigateWelcome() async {
     // get the necessary fields and make the api request
@@ -68,22 +63,27 @@ class _SignUpPageState extends State<SignUpPage> {
           compID: compIDController.text,
           password: passwordController.text);
 
-        final response = await sl<SignUpUsecase>().call(params: createUser);
+      final response = await sl<SignUpUsecase>().call(params: createUser);
 
-        response.fold((error){
-          print('ERROR OCCURRED ____________________________________________________: $error');
-        }, (success){
-          print('SUCCESS OCCURRED ____________________________________________________: $success');
+      response.fold((error) {
+        print(
+            'ERROR OCCURRED ____________________________________________________: $error');
+      }, (success) {
+        // this should be the decoded token
+        print(
+            'SUCCESS OCCURRED ____________________________________________________: $success');
+        //
 
-      emailController.clear();
-      phoneController.clear();
-      compIDController.clear();
-      passwordController.clear();
-      confirmPasswordController.clear();
+        emailController.clear();
+        phoneController.clear();
+        compIDController.clear();
+        passwordController.clear();
+        confirmPasswordController.clear();
+        // update the state with 
+        context.read<TextFormCubit>().submissionComplete();
 
-        });
-      
-
+// PUT THE TOKEN IN THE USER DATA so that it can be accessed in  our state 
+      });
     } on SocketException catch (e) {
       // Handle network errors
       print(
@@ -209,7 +209,14 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             button1: CustomButton(
-              title: "Submit",
+              title:Text(
+              'Submit',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
               onTap: navigateWelcome,
               width: MediaQuery.of(context).size.width * 0.9,
               height: 60,
@@ -287,8 +294,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "Enter Your Email",
                     prefixIcon: Icons.mail,
                     textController: emailController,
-                    validator: SignupValidators.validateEmail,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                    validator: (value) => SignupValidators.validateEmail(context, value),
+                  
                   ),
 
                   const SizedBox(
@@ -298,7 +305,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   PhoneLabelTextfield(
                     label: 'Phone Number',
                     controller: phoneController,
-                    onChanged: (phone) => SignupValidators.validateForm(context, _formKey),
                   ),
 
                   const SizedBox(
@@ -312,8 +318,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: "COMP-9F1A2B3C",
                     prefixIcon: Icons.shopping_bag,
                     textController: compIDController,
-                    validator: SignupValidators.validateCompanyId,
-                    onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                    validator: (value) => SignupValidators.validateCompanyId(context, value),
+                  
                   ),
 
                   const SizedBox(
@@ -338,8 +344,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             context.read<SignupCubit>().updateObscure1();
                           },
                           textController: passwordController,
-                          validator: SignupValidators.validatePassword,
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                          validator: (value) => SignupValidators.validatePassword(context, value),
+                        
                         ),
 
                         const SizedBox(
@@ -359,9 +365,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             context.read<SignupCubit>().updateObscure2();
                           },
                           textController: confirmPasswordController,
-                          validator: SignupValidators.validateConfirmPassword(
-                              passwordController.text),
-                          onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+                          validator: (value) => SignupValidators.validateConfirmPassword(context, passwordController.text, value),
+                        
                         ),
 
                         const SizedBox(
@@ -376,17 +381,16 @@ class _SignUpPageState extends State<SignUpPage> {
           Row(
             children: [
               // checkbox
-              BlocBuilder<SignupCubit,SignupState>(
-                      builder: (context,state){
-                      return Checkbox(
-                      value: state.isSelected,
-                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
-                      checkColor: AppColors.primaryColor,
-                      activeColor: const Color.fromARGB(255, 214, 213, 213),
-                      side:
-                          BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    );
-                    }),
+              BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
+                return Checkbox(
+                  value: state.isSelected,
+                  onChanged: (value) =>
+                      context.read<SignupCubit>().updateIsSelected(),
+                  checkColor: AppColors.primaryColor,
+                  activeColor: const Color.fromARGB(255, 214, 213, 213),
+                  side: BorderSide(color: AppColors.primaryColor, width: 2.0),
+                );
+              }),
 
               // rich text
 
@@ -418,19 +422,38 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // sign up button
-
-          BlocBuilder<TextFormCubit,TextFormState>(
-            builder: (context,state){
+          // TODO: store the user information from token to the
+          BlocBuilder<TextFormCubit, TextFormState>(builder: (context, state) {
             return Padding(
-            padding: const EdgeInsets.all(5),
-            child: CustomButton(
-              title: "Sign Up",
-              onTap: state.isFormValid ? navigateWelcome : (){},
-              width: 20,
-              height: 60,
-              color: state.isFormValid ? AppColors.primaryColor : AppColors.primaryColor.withAlpha(128),
+              padding: const EdgeInsets.all(5),
+              child: CustomButton(
+                title: state.isSubmitting
+      ? CircularProgressIndicator(
+        valueColor:AlwaysStoppedAnimation<Color>(Colors.white)
+      )
+      :Text(
+              'Sign Up',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          );
+            // on tap we should start submitting 
+                onTap: state.isSubmitting ||
+                        !state.isFormValid
+                    ? null
+                    : () {
+                        context.read<TextFormCubit>().startSubmitting();
+                        navigateWelcome();
+                      },
+                width: 20,
+                height: 60,
+                color: state.isFormValid
+                    ? AppColors.primaryColor
+                    : AppColors.primaryColor.withAlpha(100),
+              ),
+            );
           }),
 
           const SizedBox(
@@ -450,7 +473,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         text: "Sign in here",
                         style: TextStyle(color: AppColors.primaryColor),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => NavigationService.navigateSignin(context))
+                          ..onTap =
+                              () => NavigationService.navigateSignin(context))
                   ]))
             ],
           ),
@@ -463,3 +487,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
+
+// NOTE: the efficient way is to validate each field on it's own and then get a message indicating that it's validated successfully
+
+

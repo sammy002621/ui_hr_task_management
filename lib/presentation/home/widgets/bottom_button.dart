@@ -17,7 +17,14 @@ class BottomButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: CustomButton(
-              title: buttonTitle,
+              title:Text(
+              buttonTitle,
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
               onTap: () {},
               width: 100,
               height: 30,

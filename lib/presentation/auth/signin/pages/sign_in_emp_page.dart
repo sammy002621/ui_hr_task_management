@@ -76,8 +76,8 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
               suffixIcon:
                 Icons.visibility_outlined,
               textController: empIDController,
-              validator: SignupValidators.validateCompanyId,
-              onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+              validator: (value) => SignupValidators.validateCompanyId(context, value),
+              
               ),
 
           const SizedBox(
@@ -94,8 +94,8 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
             suffixIcon:
               Icons.visibility_outlined,
             textController: passwordController,
-            validator: SignupValidators.validatePassword,
-            onChanged: (value) => SignupValidators.validateForm(context,_formKey),
+            validator: (value) => SignupValidators.validatePassword(context, value),
+            
           ),
 
           // remember me
@@ -149,7 +149,14 @@ class _SignInEmpPageState extends State<SignInEmpPage> {
 
           // sign in
           CustomButton(
-            title: "Sign In", 
+            title:Text(
+              'Sign In',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ), 
             onTap: () => NavigationService.navigateHome(context),
             width: MediaQuery.of(context).size.width * 0.9, 
             height: 60,),

@@ -6,39 +6,48 @@ import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 
 class SignupValidators {
   // function to validate the email address
-  static String? Function(String?)? validateEmail = (String? email) {
-    if (email == null || email.isEmpty) return "Email is required";
+  static String? validateEmail(BuildContext context, String? email) {
+    if (email == null || email.isEmpty) {
+      context.read<TextFormCubit>().updateEmailValid(false);
+      return "Email is required";
+    }
     final regex = RegExp(r"^[^@]+@[^@]+\.[a-zA-Z]{2,}$");
-    return regex.hasMatch(email) ? null : "Please enter valid email";
-  };
+    final emailValid = regex.hasMatch(email);
+    context.read<TextFormCubit>().updateEmailValid(emailValid);
+    return emailValid ? null : "Enter Valid Email";
+  }
 
-// function to validate company id
-  static String? Function(String?) validateCompanyId = (String? companyId) {
+  // function to validate company id
+  static String? validateCompanyId(BuildContext context, String? companyId) {
     if (companyId == null || companyId.isEmpty) {
+      context.read<TextFormCubit>().updateCompanyIdValid(false);
       return "Company ID is required";
     }
 
     if (!companyId.startsWith("COMP-")) {
+      context.read<TextFormCubit>().updateCompanyIdValid(false);
       return "ID should start with COMP-";
     }
 
-    // Remove "COMP-" and  if remaining part is exactly 8 characters
-    String remainingPart = companyId.substring(5); // 5 is length of "COMP-"
+    String remainingPart = companyId.substring(5);
     if (remainingPart.length != 6) {
+      context.read<TextFormCubit>().updateCompanyIdValid(false);
       return "6 characters required after COMP-";
     }
 
-    return null; // Return null when validation passes
-  };
+    context.read<TextFormCubit>().updateCompanyIdValid(true);
+    return null;
+  }
 
-// function to validate the password
-
-  static String? Function(String?) validatePassword = (String? password) {
+  // function to validate the password
+  static String? validatePassword(BuildContext context, String? password) {
     if (password == null || password.isEmpty) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Password required";
     }
 
     if (password.length < 8) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Min 8 characters";
     }
 
@@ -48,57 +57,57 @@ class SignupValidators {
     bool hasSpecialChar = password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
 
     if (!hasUppercase) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Add uppercase letter";
     }
 
     if (!hasLowercase) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Add lowercase letter";
     }
 
     if (!hasDigit) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Add a number";
     }
 
     if (!hasSpecialChar) {
+      context.read<TextFormCubit>().updatePasswordValid(false);
       return "Add special char (!@#\$...)";
     }
 
+    context.read<TextFormCubit>().updatePasswordValid(true);
     return null;
-  };
-
-// function to validate confirm password
-
-  static String? Function(String?) validateConfirmPassword(String? password) {
-    return (String? confirmPassword) {
-      if (confirmPassword == null || confirmPassword.isEmpty) {
-        return "Password required";
-      }
-
-      if (confirmPassword != password) {
-        return "Passwords must match";
-      }
-
-      return null;
-    };
   }
 
+  // function to validate confirm password
+  static String? validateConfirmPassword(BuildContext context, String password, String? confirmPassword) {
+    if (confirmPassword == null || confirmPassword.isEmpty) {
+      context.read<TextFormCubit>().updateConfirmPasswordValid(false);
+      return "Password required";
+    }
 
+    if (confirmPassword != password) {
+      context.read<TextFormCubit>().updateConfirmPasswordValid(false);
+      return "Passwords must match";
+    }
 
-
-
-// function to validate the phoneNumber field 
-static String? validatePhoneNumber(PhoneNumber? phone,TextEditingController? controller){
-     if (phone!.number.isEmpty) {
-                  return "Phone Number is Required";
-                }
-                return null;
-}
-
-// function to check if the whole form is validated
-  static void validateForm(BuildContext context, GlobalKey<FormState> formKey) {
-    // Check if the whole form is valid
-    final isValid = formKey.currentState?.validate() ?? false;
-    context.read<TextFormCubit>().updateIsFormValid(isValid);
-    print(context.read<TextFormCubit>().state.isFormValid);
+    context.read<TextFormCubit>().updateConfirmPasswordValid(true);
+    return null;
   }
+
+  // function to validate the phoneNumber field
+  static String? validatePhoneNumber(BuildContext context, PhoneNumber? phone, TextEditingController? controller) {
+    if (phone!.number.isEmpty || controller!.text.isEmpty) {
+      context.read<TextFormCubit>().updatePhoneNumberValid(false);
+      return "Phone Number is Required";
+    }
+
+    context.read<TextFormCubit>().updatePhoneNumberValid(true);
+    return null;
+  }
+
+  
+    // separate logic to validate the phone number on it's own
+    // phone_number_validated = false ; // initially if the phone number field is completely validated then phone_number_validated = true then return
 }

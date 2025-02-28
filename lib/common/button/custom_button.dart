@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
-  final String title;
+  final Widget title;
   final double width;
   final double height;
   final double? padding;
@@ -45,14 +45,7 @@ class CustomButton extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(padding ?? 1),
           child: Center(
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: fontSize ?? 20,
-                color: textColor ?? Colors.white,
-                fontWeight: fontWeight ?? FontWeight.w500,
-              ),
-            ),
+            child: title,
           ),
         ),
       ),

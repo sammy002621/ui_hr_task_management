@@ -15,14 +15,13 @@ class LabelTextfield extends StatefulWidget {
   final TextEditingController textController;
   final List<String>? dropdownItems; // List of dropdown items (country codes)
   final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
   void Function()? onTap;
+  final void Function(String)? onFieldSubmitted;
   LabelTextfield({
     super.key,
     required this.label,
     required this.hintText,
     required this.textController,
-    required this.onChanged,
     this.prefixIcon,
     this.inputType,
     this.suffixIcon,
@@ -31,6 +30,7 @@ class LabelTextfield extends StatefulWidget {
     this.padding,
     this.onTap,
     this.validator,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -89,8 +89,9 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                 return Expanded(
                   child: TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged:widget.onChanged,
+                    // onChanged:widget.onChanged,
                     validator:widget.validator ,
+                    onFieldSubmitted:widget.onFieldSubmitted ,
                     controller: widget.textController,
                     obscureText: widget.obscureText ?? false,
                     keyboardType:

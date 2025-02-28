@@ -94,7 +94,14 @@ class Meeting extends StatelessWidget {
                   ),
 
                   // join meeting
-                  CustomButton(title: "Join Meet", onTap: (){}, width: 85, height: 35,fontWeight: FontWeight.w500,fontSize: 14,)
+                  CustomButton(title:Text(
+              'Join Meet',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ), onTap: (){}, width: 85, height: 35,fontWeight: FontWeight.w500,fontSize: 14,)
                 ],
               )
             ],

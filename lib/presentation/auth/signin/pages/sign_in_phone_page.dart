@@ -91,7 +91,14 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
                 onSubmit: (String verificationCode) {}, // end onSubmit
               ), 
               button1: CustomButton(
-                title: "Submit",
+                title:Text(
+              'Submit',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
                 onTap: () => NavigationService.navigateHome(context),
                width: MediaQuery.of(context).size.width * 0.9,
                 height: 60,
@@ -202,7 +209,8 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           ),
           //password
 
-          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,onChanged: (phone) => SignupValidators.validateForm(context, _formKey),),
+          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,
+          ),
 
           // remember me
 
@@ -255,7 +263,14 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
 
           // sign in
           CustomButton(
-            title: "Sign In",
+            title:Text(
+              'Sign In',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             onTap: _navigatePhoneSignin,
             width:MediaQuery.of(context).size.width * 0.9,
             height: 60,

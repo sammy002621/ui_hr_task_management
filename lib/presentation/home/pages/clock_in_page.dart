@@ -66,7 +66,14 @@ class ClockInPage extends StatelessWidget {
           ],
         ),
         button: CustomButton(
-            title: 'Clock In',
+            title:Text(
+              'Clock In',
+              style: TextStyle(
+                fontSize:  20,
+                color:  Colors.white,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             onTap: () {},
             width: MediaQuery.of(context).size.width * 0.9,
             height: 60)),

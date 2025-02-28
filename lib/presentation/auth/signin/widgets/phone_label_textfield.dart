@@ -10,13 +10,13 @@ class PhoneLabelTextfield extends StatefulWidget {
   final String label;
   final double? padding;
   final TextEditingController? controller;
-  final void Function(PhoneNumber phoneNumber)? onChanged;
-   const PhoneLabelTextfield({
+  final void Function(String)? onSubmitted;
+  const PhoneLabelTextfield({
     super.key,
     required this.label,
-    required this.onChanged,
     this.controller,
     this.padding,
+    this.onSubmitted,
   });
 
   @override
@@ -47,10 +47,13 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
           ),
           // Dropdown and TextField
 
-          FormField<PhoneNumber>(builder: (state) {
+          FormField<PhoneNumber>(
+          builder: (state) {
             return IntlPhoneField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              validator:(phone) => SignupValidators.validatePhoneNumber(phone,widget.controller),
+              onSubmitted:widget.onSubmitted ,
+              autovalidateMode: AutovalidateMode.always,
+              validator: (phone) => SignupValidators.validatePhoneNumber(
+                  context,phone,widget.controller),
               onCountryChanged: (country) {
                 context
                     .read<PhoneNumberCubit>()
@@ -104,7 +107,6 @@ class _PhoneLabelTextfieldState extends State<PhoneLabelTextfield> {
                   // errorText: 'Invalid Phone Number'
                   ),
               initialCountryCode: 'IN',
-              onChanged: widget.onChanged,
             );
           })
         ],

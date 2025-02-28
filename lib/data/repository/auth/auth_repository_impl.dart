@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:workmate/data/models/create_user.dart';
+import 'package:workmate/data/models/sign_in_user.dart';
 import 'package:workmate/data/sources/auth/auth_service.dart';
 import 'package:workmate/domain/repository/auth/auth_repository.dart';
 
@@ -8,9 +9,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   AuthRepositoryImpl(this.authService);
   @override
-  Future<Either> signIn() {
-    // TODO:impelement signIn
-    throw UnimplementedError();
+  Future<Either> signIn(SignInUser signinUser) async {
+    return authService.signIn(signinUser);
   }
 
   @override
