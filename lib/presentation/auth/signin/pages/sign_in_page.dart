@@ -11,8 +11,8 @@ import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dar
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
-import 'package:workmate/services/navigation_service.dart';
-import 'package:workmate/validators/signup_validators.dart';
+import 'package:workmate/application/services/navigation_service.dart';
+import 'package:workmate/application/validators/signup_validators.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

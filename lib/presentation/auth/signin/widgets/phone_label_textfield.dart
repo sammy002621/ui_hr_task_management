@@ -4,7 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/bloc/phone_number_cubit.dart';
-import 'package:workmate/validators/signup_validators.dart';
+import 'package:workmate/application/validators/signup_validators.dart';
 
 class PhoneLabelTextfield extends StatefulWidget {
   final String label;

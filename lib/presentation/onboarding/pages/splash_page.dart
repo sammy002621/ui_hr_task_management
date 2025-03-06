@@ -21,8 +21,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  final PageController _controller = PageController();
-
+  final PageController _controller = PageController(); 
   void _onSkip() => _controller.jumpToPage(3);
 
   void _onNext() => _controller.nextPage(
@@ -54,6 +53,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: GradientBackground(
         child: Stack(
@@ -68,7 +68,8 @@ class _SplashPageState extends State<SplashPage> {
               ],
             ),
             Align(
-              alignment: Alignment(0,1),
+              // according to the size of the height of the window we will decide whether or not it should be 0.9 or 1
+              alignment: Alignment(0,screenHeight > 700 ? 0.85 : 1),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

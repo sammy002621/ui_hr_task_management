@@ -7,8 +7,8 @@ import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
-import 'package:workmate/services/navigation_service.dart';
-import 'package:workmate/validators/signup_validators.dart';
+import 'package:workmate/application/services/navigation_service.dart';
+import 'package:workmate/application/validators/signup_validators.dart';
 
 class SignInEmpPage extends StatefulWidget {
   const SignInEmpPage({super.key});

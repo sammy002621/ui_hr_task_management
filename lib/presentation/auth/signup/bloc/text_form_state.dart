@@ -6,7 +6,7 @@ class TextFormState {
   final bool isPhoneNumberValid;
   final bool isFormValid;
   final bool isSubmitting;
-  final String? error;
+  final Object? error;
 
   TextFormState({
     this.isEmailValid = false,
@@ -27,7 +27,7 @@ class TextFormState {
     bool? isPhoneNumberValid,
     bool? isFormValid,
     bool? isSubmitting,
-    String? error,
+    Object? error,
   }) {
     return TextFormState(
       isEmailValid: isEmailValid ?? this.isEmailValid,

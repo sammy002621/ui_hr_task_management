@@ -6,7 +6,7 @@ import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
-import 'package:workmate/validators/signup_validators.dart';
+import 'package:workmate/application/validators/signup_validators.dart';
 
 class WorkProfilePage extends StatelessWidget {
    WorkProfilePage({super.key});

@@ -46,7 +46,7 @@ class TextFormCubit extends Cubit<TextFormState> {
     emit(state.copyWith(isSubmitting: false));
   }
 
-  void setError(String error) {
+  void setError(Object error) {
     emit(state.copyWith(isSubmitting: false, error: error));
   }
 

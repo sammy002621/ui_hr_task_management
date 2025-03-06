@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:workmate/data/models/create_user.dart';
 import 'package:workmate/data/models/sign_in_user.dart';
 import 'package:workmate/data/sources/auth/auth_service.dart';
@@ -23,16 +24,15 @@ class AuthServiceImpl implements AuthService {
             'ERROR LOGGING IN USER ______________________________________: ${response.body}');
       }
     } catch (e) {
-      return Left(e.toString());
+      return Left(e);
     }
-
   }
 
 // TODO: try to find a way that the phone number will also be validated like the others as long as nothing is in it or it is empty
   @override
   Future<Either> signUp(CreateUser createUser) async {
     try {
-      var url = Uri.http('10.0.2.2:5500', 'workmate/v1/auth/sign-up');
+      var url = Uri.http('${dotenv.env['address']}:${dotenv.env['port']}', 'workmate/v1/auth/sign-up');
       var response = await http.post(url, body: {
         // we need to pass the body in
         'email': createUser.email,
@@ -45,7 +45,7 @@ class AuthServiceImpl implements AuthService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         // we will return a right with the user object
         return Right(
-            'USER CREATED SUCCESSFULLY_______________________ ${response.body}');
+            '${response.body}');
       } else {
         // if the user was not created successfully
         // we will return a left with the error message
@@ -54,10 +54,7 @@ class AuthServiceImpl implements AuthService {
       }
     } catch (e) {
       // if it fails we will return a left
-      return Left(e.toString());
+      return Left('ANOTHER ERROR OCCURED DURING USER CREATION:______________________${e}');
     }
   }
 }
-
-
-

@@ -9,6 +9,7 @@ class Onboarding2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: GradientBackground(
         child: Stack(
@@ -39,7 +40,7 @@ class Onboarding2 extends StatelessWidget {
           
 // header
           Align(
-            alignment: const Alignment(-0.6, 0.3),
+            alignment:  Alignment(0, screenHeight > 700 ? 0.25 : 0.3),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

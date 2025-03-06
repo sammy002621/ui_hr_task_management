@@ -3,13 +3,15 @@
 class UserState {
   final String id;
   final String email;
+  final String token;
 
-  UserState({required this.id, required this.email});
+  UserState({required this.id, required this.email, required this.token});
 
-  UserState copyWith({String? id, String? email}) {
+  UserState copyWith({String? id, String? email, String? token}) {
     return UserState(
       id: id ?? this.id,
       email: email ?? this.email,
+      token: token ?? this.token,
     );
   }
 }

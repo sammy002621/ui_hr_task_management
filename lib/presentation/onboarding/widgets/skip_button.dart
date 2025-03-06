@@ -31,8 +31,8 @@ class SkipButton extends StatelessWidget {
                 index == 3 ? "Sign Up" : title,
                 style: TextStyle(
                     fontSize: 20,
-                    color: Color(0xff7A5AF8),
-                    fontWeight: FontWeight.w500),
+                    color: Color.fromARGB(255, 92, 71, 172),
+                    fontWeight:FontWeight.w600),
               ),
             ),
           ));

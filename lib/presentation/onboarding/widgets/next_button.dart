@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/onboarding/bloc/cubit/onboarding_cubit.dart';
 
 class NextButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class NextButton extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.9,
           height: 60,
           decoration: BoxDecoration(
-              color: Color.fromARGB(255, 60, 21, 218),
+              color: Color.fromARGB(255, 115, 81, 249),
               borderRadius: BorderRadius.circular(50)),
           child: Center(
             child: Text(
@@ -31,7 +32,7 @@ class NextButton extends StatelessWidget {
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
-                  fontWeight: FontWeight.w500),
+                  fontWeight: FontWeight.w600),
             ),
           ),
         ),

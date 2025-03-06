@@ -7,7 +7,7 @@ import 'package:workmate/presentation/home/widgets/centered_container.dart';
 class CustomModalSheet extends StatefulWidget {
   final String iconPath;
   final String title;
-  final RichText description;
+  final Widget description;
   final Widget? content;
   final Widget? belowTextField;
   final Widget button1;
