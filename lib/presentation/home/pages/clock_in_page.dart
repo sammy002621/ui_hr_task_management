@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:workmate/common/button/custom_button.dart';
-import 'package:workmate/core/configs/assets/app_icons.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/widgets/clock_in_out_card.dart';
@@ -12,17 +10,9 @@ import 'package:workmate/presentation/home/widgets/half_background_container.dar
 import 'package:workmate/presentation/home/widgets/total_working_hour.dart';
 
 class ClockInPage extends StatelessWidget {
-  ClockInPage({super.key});
-
-
-  
- 
-
- 
-
+  const ClockInPage({super.key});
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
       final cards = [
     TotalWorkingHour(

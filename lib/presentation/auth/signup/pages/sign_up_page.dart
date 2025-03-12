@@ -230,6 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
           );
         });
   }
+  
 
   void navigateWelcome() {
     Navigator.pop(context);
@@ -326,14 +327,6 @@ class _SignUpPageState extends State<SignUpPage> {
               throw FormatException('Empty response from server');
             }
 
-            // Print the first and last parts of the string to identify issues
-            int previewLength = min(50, success.length);
-            print(
-                'First $previewLength chars: ${success.substring(0, previewLength)}');
-            if (success.length > previewLength) {
-              print(
-                  'Last $previewLength chars: ${success.substring(success.length - previewLength)}');
-            }
 
             // Try cleaning the string before parsing
             String cleanedString = success.trim();
@@ -349,10 +342,6 @@ class _SignUpPageState extends State<SignUpPage> {
               print('Successfully parsed JSON after cleaning');
             } catch (parseError) {
               print('First parsing attempt failed: $parseError');
-
-              // Log character codes to identify invisible problematic characters
-              print(
-                  'Character codes of first 10 chars: ${cleanedString.substring(0, min(10, cleanedString.length)).runes.map((r) => '0x${r.toRadixString(16)}').join(', ')}');
 
               // Try a second approach - if there might be double encoding
               try {
@@ -629,7 +618,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
 
           // sign up button
-          // TODO: store the user information from token to the user state
           BlocBuilder<TextFormCubit, TextFormState>(builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.all(5),

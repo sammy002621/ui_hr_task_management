@@ -14,18 +14,14 @@ import 'package:workmate/presentation/onboarding/pages/splash_page.dart';
 import 'package:workmate/service_locator.dart';
 
 void main() async {
+  //TODO: make sure that if there is an already logged in user we will go to the home page if not we will go to the onboarding page
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "assets/.env");
-  await UserCubit().loadUserFromPreferences();
   await initializeDependencies();
-  runApp(
-      // BlocProvider(
-      //   create: (context) => OnboardingCubit(),
-      //   child:const MyApp() ,
-      //   )
-
-      MultiBlocProvider(providers: [
-    BlocProvider(create: (context) => UserCubit()),
+  final userCubit = UserCubit();
+  await userCubit.loadUserFromPreferences();
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (context) => userCubit),
     BlocProvider(create: (context) => OnboardingCubit()),
     BlocProvider(create: (context) => NavigationCubit()),
     BlocProvider(create: (context) => SignupCubit()),
@@ -43,12 +39,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
           textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
-          // according to the state of user we will navigate to the home page or the onboarding page
-          // if we have user credentials in our cubit then go to the home page if not go to the onboarding page
-      home: BlocBuilder<UserCubit,UserState>(builder: (context, state) {
+      // according to the state of user we will navigate to the home page or the onboarding page
+      // if we have user credentials in our cubit then go to the home page if not go to the onboarding page
+      home: BlocBuilder<UserCubit, UserState>(builder: (context, state) {
         if (state.token.isNotEmpty) {
+          print("token is : ${state.token}");
           return MainHomeScreen();
         } else {
+          print("no token is : ${state.token}");
           return SplashPage();
         }
       }),
