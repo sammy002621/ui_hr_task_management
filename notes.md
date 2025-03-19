@@ -80,3 +80,16 @@ USE CASE DIAGRAMS ACT AS A FOUNDATION TO COME UP WITH Class diagrams
  - a user should be able to choose whether to continue the game or not 
 
 
+
+
+
+
+
+
+
+
+ WHAT DO I EXPECT FROM A WORK MANAGEMENT APPLICATION 
+ * employees should be able to go into meetings : video call meetings or audio call meetings 
+ * employees should be assigned tasks 
+
+

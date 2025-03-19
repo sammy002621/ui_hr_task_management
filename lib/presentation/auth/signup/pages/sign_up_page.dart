@@ -8,6 +8,8 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:workmate/common/button/custom_button.dart';
 import 'package:workmate/data/models/create_user.dart';
+import 'package:workmate/data/models/send_otp.dart';
+import 'package:workmate/domain/usecases/auth/send_otp_usecase.dart';
 import 'package:workmate/domain/usecases/auth/sign_up_usecase.dart';
 import 'package:workmate/presentation/auth/signup/bloc/text_form_cubit.dart';
 import 'package:workmate/presentation/auth/signup/bloc/text_form_state.dart';
@@ -24,7 +26,6 @@ import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -51,121 +52,117 @@ class _SignUpPageState extends State<SignUpPage> {
     return completeNumber;
   }
 
-  void navigateSignup() async {
-    // get the necessary fields and make the api request
-    try {
-      final createdUser = CreateUser(
-          email: emailController.text,
-          phone: getCompleteNumber(phoneController.text),
-          compID: compIDController.text,
-          password: passwordController.text);
+//   void navigateSignup() async {
+//     // get the necessary fields and make the api request
+//     try {
+//       final createdUser = CreateUser(
+//           email: emailController.text,
+//           phone: getCompleteNumber(phoneController.text),
+//           compID: compIDController.text,
+//           password: passwordController.text);
 
-      final response = await sl<SignUpUsecase>().call(params: createdUser);
+//       final response = await sl<SignUpUsecase>().call(params: createdUser);
 
-      response.fold((error) {
-        print(
-            'ERROR OCCURRED ____________________________________________________: $error');
+//       response.fold((error) {
+//         print(
+//             'ERROR OCCURRED ____________________________________________________: $error');
 
-        String errorMessage = error['message'] ?? 'Unknown error';
-        var snackBar = SnackBar(
-          content: Text(errorMessage),
-          duration: Duration(seconds: 5),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        // call the state
-        context.read<TextFormCubit>().setError(error);
-      }, (success) async {
-        // this should be the decoded token
-        final Map<String, dynamic> responseData = await jsonDecode(success);
-        print(
-            "response data is :_______________________________________ ${responseData}");
-        final user = responseData['user'];
-        final String email = user['email'];
-        final String id = user['_id'];
-        final String token = responseData['token'];
-        print(
-            'SUCCESS OCCURRED ____________________________________________________: $responseData');
-        print(
-            "before user registration : _____________________________________________________________________________");
-        context.read<UserCubit>().saveUserToPreferences(id, email, token);
-        print(
-            "after user registration : _____________________________________________________________________________________");
-        // clear the fields
+//         String errorMessage = error['message'] ?? 'Unknown error';
+//         var snackBar = SnackBar(
+//           content: Text(errorMessage),
+//           duration: Duration(seconds: 5),
+//         );
+//         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//         // call the state
+//         context.read<TextFormCubit>().setError(error);
+//       }, (success) async {
+//         // this should be the decoded token
+//         final Map<String, dynamic> responseData = await jsonDecode(success);
+//         print(
+//             "response data is :_______________________________________ ${responseData}");
+//         final user = responseData['user'];
+//         final String email = user['email'];
+//         final String id = user['_id'];
+//         final String token = responseData['token'];
+//         print(
+//             'SUCCESS OCCURRED ____________________________________________________: $responseData');
+//         print(
+//             "before user registration : _____________________________________________________________________________");
+//         context.read<UserCubit>().saveUserToPreferences(id, email, token);
+//         print(
+//             "after user registration : _____________________________________________________________________________________");
+//         // clear the fields
 
-        emailController.clear();
-        phoneController.clear();
-        compIDController.clear();
-        passwordController.clear();
-        confirmPasswordController.clear();
-        // update the state with
-        context.read<TextFormCubit>().submissionComplete();
+//         emailController.clear();
+//         phoneController.clear();
+//         compIDController.clear();
+//         passwordController.clear();
+//         confirmPasswordController.clear();
+//         // update the state with
+//         context.read<TextFormCubit>().submissionComplete();
 
-        // navigate to next screen
-        _navigatePhoneSignup();
+// // PUT THE TOKEN IN THE USER DATA so that it can be accessed in  our state
+//       });
+//     } on SocketException catch (e) {
+//       // Handle network errors
+//       print(
+//           'NETWORK ERROR OCCURRED ___________________________________________: $e');
+//       // Show user-friendly message
+//       final errorMessage =
+//           'Network error occurred. Please check your connection.';
+//       var snackBar = SnackBar(
+//         content: Text(errorMessage),
+//         duration: Duration(seconds: 5),
+//       );
+//       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//       context.read<TextFormCubit>().setError(e);
+//     } catch (e) {
+//       // Handle other types of errors
+//       print(
+//           'UNKNOWN ERROR OCCURRED ____________________________________________________: $e');
+//       // call the state
+//       final errorMessage = 'An error occurred. Please try again.';
 
-// PUT THE TOKEN IN THE USER DATA so that it can be accessed in  our state
-      });
-    } on SocketException catch (e) {
-      // Handle network errors
-      print(
-          'NETWORK ERROR OCCURRED ___________________________________________: $e');
-      // Show user-friendly message
-      final errorMessage =
-          'Network error occurred. Please check your connection.';
-      var snackBar = SnackBar(
-        content: Text(errorMessage),
-        duration: Duration(seconds: 5),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      context.read<TextFormCubit>().setError(e);
-    } catch (e) {
-      // Handle other types of errors
-      print(
-          'UNKNOWN ERROR OCCURRED ____________________________________________________: $e');
-      // call the state
-      final errorMessage = 'An error occurred. Please try again.';
+//       var snackBar = SnackBar(
+//         content: Text(errorMessage),
+//         duration: Duration(seconds: 5),
+//       );
+//       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//       context.read<TextFormCubit>().setError(e);
+//     }
+//   }
 
-      var snackBar = SnackBar(
-        content: Text(errorMessage),
-        duration: Duration(seconds: 5),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      context.read<TextFormCubit>().setError(e);
-    }
-  }
-
-  void _navigatePhoneSignup() {
+// temporarily pass the email in here for verification
+  void _navigatePhoneSignup(String email) async {
+    String otp = '';
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return CustomModalSheet(
             title: "Email Verification Sent!",
-            description: BlocBuilder<UserCubit,UserState>(
-              builder: (context, state) {
-              return RichText(
-                  text: TextSpan(
-                      text: "Verification code will be sent to the email  ",
-                      style: TextStyle(
-                          color: const Color(0xff263238),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500),
-                      children: <TextSpan>[
-                    // load the email from the user state
-                    TextSpan(
-                      text: state.email,
-                      style: TextStyle(
-                        color: AppColors.descriptionColor,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " for your account verification process.",
-                      style: TextStyle(
+            description: RichText(
+                text: TextSpan(
+                    text: "Verification code will be sent to the email  ",
+                    style: TextStyle(
                         color: const Color(0xff263238),
-                      ),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500),
+                    children: <TextSpan>[
+                  // load the email from the user state
+                  TextSpan(
+                    text: email,
+                    style: TextStyle(
+                      color: AppColors.descriptionColor,
                     ),
-                  ]));
-            }),
+                  ),
+                  TextSpan(
+                    text: " for your account verification process.",
+                    style: TextStyle(
+                      color: const Color(0xff263238),
+                    ),
+                  ),
+                ])),
             content: OtpTextField(
               decoration: InputDecoration(
                   hintStyle: TextStyle(color: const Color(0xffEAECF0))),
@@ -180,7 +177,21 @@ class _SignUpPageState extends State<SignUpPage> {
                 //handle validation or checks here
               },
               //runs when every textfield is filled
-              onSubmit: (String verificationCode) {}, // end onSubmit
+              onSubmit: (String verificationCode) {
+                print("VERIFICATION CODE: ${verificationCode}");
+                // call the method to send the otp
+                try {
+                  otp = verificationCode;
+                  print("Value of otp is : $otp");
+                } catch (e) {
+                  print('ERROR OCCURRED: $e');
+                  String errorMessage = e is Map
+                      ? (e['message'] ?? 'Unknown error')
+                      : e.toString();
+                  showSnackBar(context, errorMessage);
+                  context.read<TextFormCubit>().setError(errorMessage);
+                }
+              }, // end onSubmit
             ),
             belowTextField: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -208,29 +219,35 @@ class _SignUpPageState extends State<SignUpPage> {
                     ]))
               ],
             ),
-            button1: CustomButton(
-              title: Text(
-                'Submit',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              onTap: navigateWelcome,
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: 60,
-              color: AppColors.primaryColor,
-            ),
+            button1: BlocBuilder<TextFormCubit, TextFormState>(
+                builder: (context, state) {
+              return CustomButton(
+                title: state.isSubmitting
+                    ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white))
+                    : Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                onTap: () => signUpUser(context, otp),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 60,
+                color: AppColors.primaryColor,
+              );
+            }),
             isTextOrButton: true,
             iconPath: AppVectors.centered_mail_icon,
             belowTextFieldHeight: 20,
             belowButton1height: 5,
             belowTextOrButtonHeight: 5,
+            topPosition: -10,
           );
         });
   }
-  
 
   void navigateWelcome() {
     Navigator.pop(context);
@@ -290,14 +307,20 @@ class _SignUpPageState extends State<SignUpPage> {
         });
   }
 
-  void signUpUser(BuildContext context) async {
+  void signUpUser(BuildContext context, String otp) async {
     try {
+      context.read<TextFormCubit>().startSubmitting();
       final createUser = CreateUser(
         email: emailController.text,
         phone: getCompleteNumber(phoneController.text),
         compID: compIDController.text,
         password: passwordController.text,
+        otp: otp,
       );
+      // when the user is on the signup page after all fields are validated
+      // before redirection to the otp page, we should call a method to send the otp to the user
+      // the user will be redirected to the otp page
+      // on the otp page, we should be able to see the users' email and the code should have been sent to the specified email
 
       // Show loading indicator before API call
       context.read<TextFormCubit>().startSubmitting();
@@ -326,7 +349,6 @@ class _SignUpPageState extends State<SignUpPage> {
               print('Empty string response');
               throw FormatException('Empty response from server');
             }
-
 
             // Try cleaning the string before parsing
             String cleanedString = success.trim();
@@ -402,8 +424,7 @@ class _SignUpPageState extends State<SignUpPage> {
           passwordController.clear();
           confirmPasswordController.clear();
 
-          // Navigate to verification screen
-          _navigatePhoneSignup();
+          navigateWelcome();
         } catch (e) {
           print('ERROR PROCESSING RESPONSE: $e');
           String errorMessage =
@@ -634,12 +655,21 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                 // on tap we should start submitting
-                onTap: state.isSubmitting || !state.isFormValid
-                    ? null
-                    : () {
-                        context.read<TextFormCubit>().startSubmitting();
-                        signUpUser(context);
-                      },
+                onTap: !state.isFormValid
+                    ? () {
+                        print("NULL CLICKED : _______________________________");
+                      }
+                    : () async {
+                      print("SIGNUP CLICKED:___________________________");
+                      // first send the otp to the passed email address
+    var response = await sl<SendOtpUsecase>().call(params: emailController.text);
+    response.fold((isLeft) {
+      print('$isLeft');
+    }, (success) {
+      print('$success');
+    });
+                      _navigatePhoneSignup(emailController.text);
+                    },
                 width: 20,
                 height: 60,
                 color: state.isFormValid
@@ -680,8 +710,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
-
-// NOTE: the efficient way is to validate each field on it's own and then get a message indicating that it's validated successfully
 
 void showSnackBar(BuildContext context, String message) {
   final snackBar = SnackBar(

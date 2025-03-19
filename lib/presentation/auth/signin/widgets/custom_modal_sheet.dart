@@ -4,7 +4,7 @@ import 'package:workmate/common/constants/context_measurements.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 
-class CustomModalSheet extends StatefulWidget {
+class CustomModalSheet extends StatelessWidget {
   final String iconPath;
   final String title;
   final Widget description;
@@ -40,12 +40,6 @@ class CustomModalSheet extends StatefulWidget {
   });
 
   @override
-  State<CustomModalSheet> createState() => _CustomModalSheetState();
-}
-
-class _CustomModalSheetState extends State<CustomModalSheet> {
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.transparent,
@@ -74,7 +68,7 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
                     children: [
                       SizedBox(height: 55),
                       Text(
-                        widget.title,
+                        title,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.headerColor,
@@ -87,20 +81,20 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: SizedBox(
                           width: 350,
-                          child: widget.description,
+                          child: description,
                         ),
                       ),
-                      SizedBox(height: widget.descriptionHeight ?? 20),
-                      widget.content ?? SizedBox.shrink(),
-                      SizedBox(height: widget.otpHeight ?? 20),
-                      widget.belowTextField ?? SizedBox.shrink(),
-                      SizedBox(height: widget.belowTextFieldHeight ?? 35),
-                      widget.button1,
-                       SizedBox(height:widget.belowButton1height ?? 20),
-                      widget.isTextOrButton
-                          ? widget.messageText ?? SizedBox.shrink()
-                          : widget.button2 ?? SizedBox.shrink(),
-                       SizedBox(height:widget.belowTextOrButtonHeight ?? 20),
+                      SizedBox(height: descriptionHeight ?? 20),
+                      content ?? SizedBox.shrink(),
+                      SizedBox(height: otpHeight ?? 20),
+                      belowTextField ?? SizedBox.shrink(),
+                      SizedBox(height: belowTextFieldHeight ?? 35),
+                      button1,
+                       SizedBox(height:belowButton1height ?? 20),
+                      isTextOrButton
+                          ? messageText ?? SizedBox.shrink()
+                          : button2 ?? SizedBox.shrink(),
+                       SizedBox(height:belowTextOrButtonHeight ?? 20),
                     ],
                   ),
                 ),
@@ -108,14 +102,14 @@ class _CustomModalSheetState extends State<CustomModalSheet> {
             ),
 
             Positioned(
-              top:widget.topPosition ?? -65,
+              top:topPosition ?? -65,
               left: context.parentWidth * 0.35,
               child: CenteredContainer(
                   borderRadius: 20,
                   width: 100,
                   height: 100,
                   bgColor: AppColors.primaryColor,
-                  child: SvgPicture.asset(widget.iconPath)),
+                  child: SvgPicture.asset(iconPath)),
             ),
           ],
         ));
