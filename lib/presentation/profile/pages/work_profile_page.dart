@@ -7,12 +7,22 @@ import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/widgets/label_textfield.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 import 'package:workmate/application/validators/signup_validators.dart';
+import 'package:dropdown_flutter/custom_dropdown.dart';
+import 'package:workmate/presentation/profile/widgets/custom_drop_down.dart';
 
 class WorkProfilePage extends StatelessWidget {
    WorkProfilePage({super.key});
 
   TextEditingController sampleController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? selectedPosition;
+  final List<String> _list = [
+    'Developer',
+    'Designer',
+    'Consultant',
+    'Student',
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -170,14 +180,26 @@ class WorkProfilePage extends StatelessWidget {
                           height: 25,
                         ),
 
-                        LabelTextfield(
-                          label: "Position",
-                          hintText: "Select Position",
-                          prefixIcon: Icons.newspaper_outlined,
-                          suffixIcon: Icons.keyboard_arrow_down_rounded,
-                          padding: 3,
-                          textController: sampleController,
-                        ),
+                        // LabelTextfield(
+                        //   label: "Position",
+                        //   hintText: "Select Position",
+                        //   prefixIcon: Icons.newspaper_outlined,
+                        //   suffixIcon: Icons.keyboard_arrow_down_rounded,
+                        //   padding: 3,
+                        //   textController: sampleController,
+                        // ),
+
+                        CustomDropdown(
+              label: "Position",
+              hintText: "Select Position",
+              prefixIcon: Icons.work_outline,
+              items: _list,
+              selectedItem: selectedPosition,
+              onChanged: (value) {
+                selectedPosition = value;
+                print("Selected Position: $value");
+              },
+            ),
 
                         const SizedBox(
                           height: 30,

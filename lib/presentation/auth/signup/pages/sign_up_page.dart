@@ -93,11 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
 //             "after user registration : _____________________________________________________________________________________");
 //         // clear the fields
 
-//         emailController.clear();
-//         phoneController.clear();
-//         compIDController.clear();
-//         passwordController.clear();
-//         confirmPasswordController.clear();
+//         
 //         // update the state with
 //         context.read<TextFormCubit>().submissionComplete();
 
@@ -230,7 +226,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.white,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                 onTap: () => signUpUser(context, otp),
@@ -254,6 +250,8 @@ class _SignUpPageState extends State<SignUpPage> {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
+        isDismissible: false, // Prevent dismissing by tapping outside
+        enableDrag: false, // Prevent dragging
         builder: (context) {
           return CustomModalSheet(
             title: "Welcome To Work Mate!",
@@ -272,10 +270,17 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              onTap: () => NavigationService.navigateProfile(context),
+              onTap: () {
+                emailController.clear();
+                phoneController.clear();
+                compIDController.clear();
+                passwordController.clear();
+                confirmPasswordController.clear();
+                NavigationService.navigateProfile(context);
+              },
               width: MediaQuery.of(context).size.width * 0.9,
               height: 60,
               color: AppColors.primaryColor,
@@ -285,11 +290,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 'Explore The App First',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  color: const Color(0xff6938EF),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              onTap: () => NavigationService.navigateHome(context),
+              onTap: (){
+                emailController.clear();
+                phoneController.clear();
+                compIDController.clear();
+                passwordController.clear();
+                confirmPasswordController.clear();
+                NavigationService.navigateHome(context);
+                },
               width: MediaQuery.of(context).size.width * 0.9,
               height: 60,
               color: Colors.white,
@@ -302,14 +314,14 @@ class _SignUpPageState extends State<SignUpPage> {
             iconPath: AppVectors.centered_profile_icon,
             belowTextOrButtonHeight: 10,
             belowTextFieldHeight: 20,
-            topPosition: -50,
+            topPosition: 0,
           );
         });
   }
 
   void signUpUser(BuildContext context, String otp) async {
+    print("Recieved otp from upper function : _________________ $otp");
     try {
-      context.read<TextFormCubit>().startSubmitting();
       final createUser = CreateUser(
         email: emailController.text,
         phone: getCompleteNumber(phoneController.text),
@@ -321,7 +333,7 @@ class _SignUpPageState extends State<SignUpPage> {
       // before redirection to the otp page, we should call a method to send the otp to the user
       // the user will be redirected to the otp page
       // on the otp page, we should be able to see the users' email and the code should have been sent to the specified email
-
+      // 928026
       // Show loading indicator before API call
       context.read<TextFormCubit>().startSubmitting();
 
@@ -416,13 +428,6 @@ class _SignUpPageState extends State<SignUpPage> {
           // Save user information
           context.read<UserCubit>().setUser(id, email, token);
           context.read<TextFormCubit>().submissionComplete();
-
-          // Clear form fields
-          emailController.clear();
-          phoneController.clear();
-          compIDController.clear();
-          passwordController.clear();
-          confirmPasswordController.clear();
 
           navigateWelcome();
         } catch (e) {
@@ -660,16 +665,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         print("NULL CLICKED : _______________________________");
                       }
                     : () async {
-                      print("SIGNUP CLICKED:___________________________");
-                      // first send the otp to the passed email address
-    var response = await sl<SendOtpUsecase>().call(params: emailController.text);
-    response.fold((isLeft) {
-      print('$isLeft');
-    }, (success) {
-      print('$success');
-    });
-                      _navigatePhoneSignup(emailController.text);
-                    },
+                        print("SIGNUP CLICKED:___________________________");
+                        // first send the otp to the passed email address
+                        context.read<TextFormCubit>().startSubmitting();
+                        var response = await sl<SendOtpUsecase>()
+                            .call(params: emailController.text);
+                        response.fold((isLeft) {
+                          print('$isLeft');
+                        }, (success) {
+                          print('$success');
+                          context.read<TextFormCubit>().submissionComplete();
+                        });
+                        _navigatePhoneSignup(emailController.text);
+                        //927258
+                      },
                 width: 20,
                 height: 60,
                 color: state.isFormValid

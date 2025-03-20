@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workmate/core/configs/assets/app_images.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
+import 'package:workmate/presentation/auth/signup/bloc/user_cubit.dart';
+import 'package:workmate/presentation/auth/signup/bloc/user_state.dart';
 import 'package:workmate/presentation/home/widgets/centered_container.dart';
 import 'package:workmate/presentation/profile/pages/work_profile_page.dart';
 import 'package:workmate/presentation/profile/widgets/list_container.dart';
@@ -86,12 +89,16 @@ class ProfilePage extends StatelessWidget {
 
                     const SizedBox(height: 3),
                     // role
-                    Text(
-                      "Tonald@work.com",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: AppColors.primaryColor,
-                      ),
+                    BlocBuilder<UserCubit, UserState>(
+                      builder: (context, state) {
+                        return Text(
+                          state.email,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppColors.primaryColor,
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 30),
                     // Additional content in a scrollable list

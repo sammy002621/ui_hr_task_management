@@ -41,7 +41,16 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.interTextTheme(Theme.of(context).textTheme)),
       // according to the state of user we will navigate to the home page or the onboarding page
       // if we have user credentials in our cubit then go to the home page if not go to the onboarding page
-      home: BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+      home: SplashPage(),
+    );
+  }
+}
+
+/**
+ * 
+ * 
+ * 
+ * BlocBuilder<UserCubit, UserState>(builder: (context, state) {
         if (state.token.isNotEmpty) {
           print("token is : ${state.token}");
           return MainHomeScreen();
@@ -49,7 +58,8 @@ class MyApp extends StatelessWidget {
           print("no token is : ${state.token}");
           return SplashPage();
         }
-      }),
-    );
-  }
-}
+      })
+ * 
+ * 
+ * 
+ */

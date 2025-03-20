@@ -41,6 +41,7 @@ class AuthServiceImpl implements AuthService {
         'phone': createUser.phone,
         'compID': createUser.compID,
         'password': createUser.password,
+        'otp':createUser.otp,
       });
 
       // if the user was created successfully
