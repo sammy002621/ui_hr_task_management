@@ -36,6 +36,7 @@ class ProfilePage extends StatelessWidget {
           child: CenteredContainer(
             width: 20,
             height: 20,
+            padding: 10,
             bgColor: Colors.white,
             child: Icon(
               Icons.keyboard_arrow_left_rounded,
@@ -72,12 +73,15 @@ class ProfilePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // name & verification
-                        Text(
+                        GestureDetector(
+                        onTap: () => _navigateProfilePage(),
+                         child: Text(
                           "Tonald Drump",
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
                           ),
+                        ),
                         ),
                         const SizedBox(width: 10),
                         Icon(

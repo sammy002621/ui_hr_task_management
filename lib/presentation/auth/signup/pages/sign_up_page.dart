@@ -52,84 +52,8 @@ class _SignUpPageState extends State<SignUpPage> {
     return completeNumber;
   }
 
-//   void navigateSignup() async {
-//     // get the necessary fields and make the api request
-//     try {
-//       final createdUser = CreateUser(
-//           email: emailController.text,
-//           phone: getCompleteNumber(phoneController.text),
-//           compID: compIDController.text,
-//           password: passwordController.text);
-
-//       final response = await sl<SignUpUsecase>().call(params: createdUser);
-
-//       response.fold((error) {
-//         print(
-//             'ERROR OCCURRED ____________________________________________________: $error');
-
-//         String errorMessage = error['message'] ?? 'Unknown error';
-//         var snackBar = SnackBar(
-//           content: Text(errorMessage),
-//           duration: Duration(seconds: 5),
-//         );
-//         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-//         // call the state
-//         context.read<TextFormCubit>().setError(error);
-//       }, (success) async {
-//         // this should be the decoded token
-//         final Map<String, dynamic> responseData = await jsonDecode(success);
-//         print(
-//             "response data is :_______________________________________ ${responseData}");
-//         final user = responseData['user'];
-//         final String email = user['email'];
-//         final String id = user['_id'];
-//         final String token = responseData['token'];
-//         print(
-//             'SUCCESS OCCURRED ____________________________________________________: $responseData');
-//         print(
-//             "before user registration : _____________________________________________________________________________");
-//         context.read<UserCubit>().saveUserToPreferences(id, email, token);
-//         print(
-//             "after user registration : _____________________________________________________________________________________");
-//         // clear the fields
-
-//         
-//         // update the state with
-//         context.read<TextFormCubit>().submissionComplete();
-
-// // PUT THE TOKEN IN THE USER DATA so that it can be accessed in  our state
-//       });
-//     } on SocketException catch (e) {
-//       // Handle network errors
-//       print(
-//           'NETWORK ERROR OCCURRED ___________________________________________: $e');
-//       // Show user-friendly message
-//       final errorMessage =
-//           'Network error occurred. Please check your connection.';
-//       var snackBar = SnackBar(
-//         content: Text(errorMessage),
-//         duration: Duration(seconds: 5),
-//       );
-//       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-//       context.read<TextFormCubit>().setError(e);
-//     } catch (e) {
-//       // Handle other types of errors
-//       print(
-//           'UNKNOWN ERROR OCCURRED ____________________________________________________: $e');
-//       // call the state
-//       final errorMessage = 'An error occurred. Please try again.';
-
-//       var snackBar = SnackBar(
-//         content: Text(errorMessage),
-//         duration: Duration(seconds: 5),
-//       );
-//       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-//       context.read<TextFormCubit>().setError(e);
-//     }
-//   }
-
-// temporarily pass the email in here for verification
   void _navigatePhoneSignup(String email) async {
+    context.read<TextFormCubit>().submissionComplete();
     String otp = '';
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
@@ -294,14 +218,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              onTap: (){
+              onTap: () {
                 emailController.clear();
                 phoneController.clear();
                 compIDController.clear();
                 passwordController.clear();
                 confirmPasswordController.clear();
                 NavigationService.navigateHome(context);
-                },
+              },
               width: MediaQuery.of(context).size.width * 0.9,
               height: 60,
               color: Colors.white,
@@ -329,16 +253,8 @@ class _SignUpPageState extends State<SignUpPage> {
         password: passwordController.text,
         otp: otp,
       );
-      // when the user is on the signup page after all fields are validated
-      // before redirection to the otp page, we should call a method to send the otp to the user
-      // the user will be redirected to the otp page
-      // on the otp page, we should be able to see the users' email and the code should have been sent to the specified email
-      // 928026
-      // Show loading indicator before API call
       context.read<TextFormCubit>().startSubmitting();
-
       final response = await sl<SignUpUsecase>().call(params: createUser);
-
       response.fold((error) {
         print('ERROR OCCURRED: $error');
         String errorMessage = error is Map
