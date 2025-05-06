@@ -109,8 +109,7 @@ class _LabelTextfieldState extends State<LabelTextfield> {
                               widget.prefixIcon,
                               color: AppColors.primaryColor,
                               size: 25,
-                            ) ??
-                            SizedBox.shrink(),
+                            ),
                       ),
                       suffixIcon: GestureDetector(
                         onTap: widget.onTap,

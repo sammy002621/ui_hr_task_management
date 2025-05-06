@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:workmate/common/button/custom_button.dart';
+import 'package:workmate/common/sizedbox/custom_sized_box.dart';
 import 'package:workmate/core/configs/assets/app_vectors.dart';
 import 'package:workmate/core/configs/theme/app_colors.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_cubit.dart';
 import 'package:workmate/presentation/auth/signin/bloc/signup_state.dart';
+import 'package:workmate/presentation/auth/signin/widgets/custom_divider.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_icon_button.dart';
 import 'package:workmate/presentation/auth/signin/widgets/custom_modal_sheet.dart';
+import 'package:workmate/presentation/auth/signin/widgets/custom_signup.dart';
 import 'package:workmate/presentation/auth/signin/widgets/phone_label_textfield.dart';
+import 'package:workmate/presentation/auth/signin/widgets/remember_me_forgot_password.dart';
 import 'package:workmate/presentation/auth/signup/pages/sign_up_page.dart';
 import 'package:workmate/application/services/navigation_service.dart';
 import 'package:workmate/application/validators/signup_validators.dart';
@@ -28,7 +32,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
   final _formKey = GlobalKey<FormState>();
 
   void _navigatePhoneSignin() {
-    showModalBottomSheet(
+     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
@@ -170,7 +174,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
         body: SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(
+          const CustomSizedBox(
             height: 30,
           ),
           // header 1
@@ -184,10 +188,10 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
           ),
 
           //description 1
-          const SizedBox(
+          const CustomSizedBox(
             height: 5,
           ),
-          SizedBox(
+          CustomSizedBox(
             width: 350,
             child: Text(
               "Sign in to my account",
@@ -200,64 +204,22 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
             ),
           ),
 
-          const SizedBox(
+          const CustomSizedBox(
             height: 35,
           ),
 
-          const SizedBox(
+          const CustomSizedBox(
             height: 10,
           ),
           //password
 
-          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,
-          ),
+          PhoneLabelTextfield(label: 'Phone Number',controller:phoneController,),
 
           // remember me
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-// remember me
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    BlocBuilder<SignupCubit,SignupState>(
-                      builder: (context,state){
-                      return Checkbox(
-                      value: state.isSelected,
-                      onChanged: (value) => context.read<SignupCubit>().updateIsSelected(),
-                      checkColor: AppColors.primaryColor,
-                      activeColor: const Color.fromARGB(255, 214, 213, 213),
-                      side:
-                          BorderSide(color: AppColors.primaryColor, width: 2.0),
-                    );
-                    }),
-                    Text(
-                      "Remember Me",
-                      style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
-                    )
-                  ],
-                ),
+          RememberMeForgotPassword(forgotPassword: (){}),
 
-// forgot password
-//NOTE: remember to implement the logic
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Forgot Password",
-                      style: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
-                    ))
-              ],
-            ),
-          ),
-
-          const SizedBox(
+          const CustomSizedBox(
             height: 20,
           ),
 
@@ -283,37 +245,9 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
 
           //divider
 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    color: const Color(0xffD0D5DD), // Divider color
-                    // Divider thickness
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
-                  child: Text(
-                    "OR",
-                    style: TextStyle(
-                      color: Colors.grey, // Text color
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: const Color(0xffD0D5DD), // Divider color
-                    thickness: 1, // Divider thickness
-                  ),
-                ),
-              ],
-            ),
-          ),
+         CustomDivider(),    
 
-          const SizedBox(
+          const CustomSizedBox(
             height: 40,
           ),
 
@@ -328,7 +262,7 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
             onTap:() => NavigationService.navigateEmployeeSignin(context),
           ),
 
-          const SizedBox(
+          const CustomSizedBox(
             height: 15,
           ),
 
@@ -338,35 +272,17 @@ class _SignInPhonePageState extends State<SignInPhonePage> {
             onTap:() => NavigationService.navigateSignin(context),
           ),
 
-          const SizedBox(
+          const CustomSizedBox(
             height: 30,
           ),
 
           // sign up
 
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                  text: TextSpan(
-                      text: "Don’t have an account? ",
-                      style: TextStyle(
-                          color: const Color(0xff263238),
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500),
-                      children: <TextSpan>[
-                    TextSpan(
-                        text: "Sign Up Here",
-                        style: TextStyle(
-                          color: const Color(0xff6938EF),
-                        ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => NavigationService.navigateSignUp(context))
-                  ]))
-            ],
-          ),
+          CustomSignup(),
 
-          const SizedBox(height: 15,)
+          const CustomSizedBox(
+            height: 15,
+          )
         ],
       ),
     ));
